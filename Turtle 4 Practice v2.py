@@ -25,9 +25,12 @@ def get_input():
             (0, 0, 255),  # blue
             (255, 165, 0)  # orange
         ]
+    # TODO: are speeds decided here, are they random?
     teams = [
+            # (laps_completed, distance_covered, color)
             (0, 0.0, "red") for _ in range(n_teams)
         ]
+    return teams
 
 # functions to perform laps, relays, size changes, etc.
 
@@ -35,6 +38,12 @@ def get_input():
 
 # Main function
 def main():
+    # get input (number of teams) from user
+    teams = get_input()
+    print(teams)
+    exit()
+
+    # Set up the screen
     turtle.setup(width=800, height=600)
     turtle.bgcolor("yellow")
     turtle.title("Turtle Relay Race")
