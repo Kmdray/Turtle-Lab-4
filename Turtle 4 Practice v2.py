@@ -13,6 +13,26 @@ def create_turtle(color, speed):
 def move_forward(t):
     t.forward(100)
 
+# Function to get input and set landscape/environment
+# TODO: get # teams, colors. draw racetrack, finish line
+
+def get_input():
+    """Gets number of teams and colors from user."""
+    n_teams = int(input("Enter number of teams: "))
+    colors_allowed = [
+            (255, 0, 0),  # red
+            (0, 255, 0),  # green
+            (0, 0, 255),  # blue
+            (255, 165, 0)  # orange
+        ]
+    teams = [
+            (0, 0.0, "red") for _ in range(n_teams)
+        ]
+
+# functions to perform laps, relays, size changes, etc.
+
+# functions to decide winner, display results, etc.
+
 # Main function
 def main():
     turtle.setup(width=800, height=600)
@@ -21,7 +41,7 @@ def main():
 
     colors = ["red", "green", "blue", "orange"]
     # Speeds corresponding to colors
-    speeds = [1, 2, 3, 4]  
+    speeds = [1, 2, 3, 4]
 
     # Create turtles with specific colors and speeds
     turtles = [create_turtle(color, speed)
@@ -46,6 +66,7 @@ def main():
                 t.goto(-350, -100 + colors.index(t.color()) * 50)
 
     turtle.done()
+
 
 if __name__ == "__main__":
     main()
