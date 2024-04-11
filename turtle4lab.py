@@ -185,9 +185,9 @@ def set_scenery(n_teams: int) -> None:
         turtle.write(i, font=("Arial", 12, "normal"))
 
 
-# functions to perform laps, relays, size changes, etc.
+# functions to perform laps, relay exchanges, size changes
 
-# functions to decide winner, display results, etc.
+# functions to decide winner, terminate race, display results
 
 
 # Main function
