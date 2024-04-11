@@ -1,20 +1,24 @@
 import turtle
 import random
 
+
 # Function to create a turtle with specific color and speed
 def create_turtle(color, speed):
     t = turtle.Turtle()
-    t.shape('turtle')
+    t.shape("turtle")
     t.color(color)
     t.speed(speed)
     return t
+
 
 # Function to move the turtle forward
 def move_forward(t):
     t.forward(100)
 
+
 # Function to get input and set landscape/environment
 # TODO: get # teams, colors. draw racetrack, finish line
+
 
 def get_input():
     """
@@ -23,17 +27,19 @@ def get_input():
     """
     n_teams = int(input("Enter number of teams: "))
     colors_allowed = [
-            (255, 0, 0),  # red
-            (0, 255, 0),  # green
-            (0, 0, 255),  # blue
-            (255, 165, 0)  # orange
-        ]
+        (255, 0, 0),  # red
+        (0, 255, 0),  # green
+        (0, 0, 255),  # blue
+        (255, 165, 0),  # orange
+    ]
     # TODO: are speeds decided here, are they random?
     teams = [
-            # (laps_completed, distance_covered, color)
-            (0, 0.0, "red") for _ in range(n_teams)
-        ]
+        # (laps_completed, distance_covered, color)
+        (0, 0.0, "red")
+        for _ in range(n_teams)
+    ]
     return teams
+
 
 def set_scenery():
     """
@@ -42,9 +48,11 @@ def set_scenery():
     """
     pass
 
+
 # functions to perform laps, relays, size changes, etc.
 
 # functions to decide winner, display results, etc.
+
 
 # Main function
 def main():
@@ -68,8 +76,7 @@ def main():
     speeds = [1, 2, 3, 4]
 
     # Create turtles with specific colors and speeds
-    turtles = [create_turtle(color, speed)
-    for color, speed in zip(colors, speeds)]
+    turtles = [create_turtle(color, speed) for color, speed in zip(colors, speeds)]
 
     # Set starting positions
     for i, t in enumerate(turtles):
