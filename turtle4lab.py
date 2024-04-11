@@ -68,6 +68,12 @@ class Team:
             ")"
         )
 
+    def starting_position(self) -> tuple[float, float]:
+        """
+        Returns the starting position of the team.
+        """
+        return -WIDTH / 2 + PADDING_SIDE, center_lane(self.id)
+
 
 def get_input() -> list:
     """
