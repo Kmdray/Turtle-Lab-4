@@ -122,6 +122,7 @@ def get_input() -> list:
 
 # Constants
 N_LANES = 6
+N_RELAYS = 4
 
 WIDTH = 800
 HEIGHT = 600
@@ -166,8 +167,24 @@ def set_scenery(n_teams: int) -> None:
     turtle.forward(HEIGHT - PADDING_TOP - PADDING_BOTTOM)
     turtle.left(90)
 
-    # Draw lanes
+    # Draw relay exchange zones
+    turtle.color("red")
     turtle.pensize(1)
+    for i in range(1, N_RELAYS):
+        turtle.penup()
+        turtle.goto(
+            -WIDTH / 2 + PADDING_SIDE + i * (WIDTH - 2 * PADDING_SIDE) / N_RELAYS,
+            -HEIGHT / 2 + PADDING_BOTTOM,
+        )
+        turtle.pendown()
+        turtle.goto(
+            -WIDTH / 2 + PADDING_SIDE + i * (WIDTH - 2 * PADDING_SIDE) / N_RELAYS,
+            HEIGHT / 2 - PADDING_TOP,
+        )
+
+    # Draw lanes
+    turtle.color("black")
+    turtle.pensize(2)
     for i in range(1, 6):  # 5 lines make 6 lanes
         turtle.penup()
         turtle.goto(
@@ -177,7 +194,7 @@ def set_scenery(n_teams: int) -> None:
         turtle.pendown()
         turtle.forward(WIDTH - 2 * PADDING_SIDE)
 
-    # Label lanes
+    # Label lanes with team index number
     for i in range(1, n_teams + 1):
         turtle.penup()
         turtle.goto(-WIDTH / 2 + 20, -12 + center_lane(i))
@@ -204,8 +221,7 @@ def main() -> int:
 
     # set up the screen
     set_scenery(n_teams=len(teams))
-    # input("Press enter to exit...")
-    # exit()
+    # turtle.done()
 
     colors = ["red", "green", "blue", "orange"]
     # Speeds corresponding to colors
