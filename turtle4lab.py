@@ -1,9 +1,17 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-Title: Turtle Relay
+Created on Wed Apr 10 18:46:15 2024 -0400
+
+Title: Turtle Relay Race
+
+Description:    This program simulates a relay race between multiple teams using the
+                turtle module.
+
 @authors: Kevin, Shane, James, Matt
 """
-
 import random
+import sys
 import turtle
 
 
@@ -28,7 +36,10 @@ def move_forward(t: turtle.Turtle) -> None:
 
 
 class Team:
-    """Team class to store team information."""
+    """
+    Team class to store team information.
+    @authors: shane
+    """
 
     def __init__(
         self,
@@ -169,4 +180,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
