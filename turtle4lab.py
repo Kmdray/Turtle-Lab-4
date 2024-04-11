@@ -10,6 +10,7 @@ Description:    This program simulates a relay race between multiple teams using
 
 @authors: Kevin, Shane, James, Matt
 """
+import os
 import random
 import sys
 import turtle
@@ -93,7 +94,10 @@ def get_input() -> list:
     ]
 
     # Get number of teams
-    n_teams = int(input("Enter number of teams, between 2 and 6: "))
+    if os.environ.get("N_TEAMS"):
+        n_teams = int(os.environ["N_TEAMS"])
+    else:
+        n_teams = int(input("Enter number of teams, between 2 and 6: "))
     if n_teams < 2 or n_teams > 6:
         raise ValueError("Number of teams must be between 2 and 6.")
 
@@ -116,52 +120,56 @@ def get_input() -> list:
     return teams
 
 
+# Constants
+WIDTH = 800
+HEIGHT = 600
+PADDING_TOP = 50
+PADDING_BOTTOM = 150
+PADDING_SIDE = 50
+
+
 def set_scenery(n_teams: int) -> None:
     """
     Sets up the racetrack and finish line.
     @authors: shane
     """
-
-    width = 800
-    height = 600
     padding = 50
 
-    turtle.setup(width=width, height=height)
+    turtle.setup(width=WIDTH, height=HEIGHT)
     turtle.bgcolor("yellow")
     turtle.title("Turtle Relay Race")
 
     # Draw rectangular racetrack perimeter
     turtle.penup()
-    turtle.goto(-width / 2 + padding, -height / 2 + padding)
+    turtle.goto(-WIDTH / 2 + PADDING_SIDE, -HEIGHT / 2 + PADDING_BOTTOM)
     turtle.pendown()
     turtle.color("black")
     turtle.pensize(5)
-    turtle.forward(width - 2 * padding)
+    turtle.forward(WIDTH - 2 * PADDING_SIDE)
     turtle.left(90)
-    turtle.forward(height - 2 * padding)
+    turtle.forward(HEIGHT - PADDING_TOP - PADDING_BOTTOM)
     turtle.left(90)
-    turtle.forward(width - 2 * padding)
+    turtle.forward(WIDTH - 2 * PADDING_SIDE)
     turtle.left(90)
-    turtle.forward(height - 2 * padding)
+    turtle.forward(HEIGHT - PADDING_TOP - PADDING_BOTTOM)
     turtle.left(90)
 
     # Draw lanes
     turtle.pensize(1)
-    for i in range(1, 6):
+    for i in range(1, 6):  # 5 lines make 6 lanes
         turtle.penup()
-        # 5 lines make 6 lanes
         turtle.goto(
-            -width / 2 + padding,
-            (-height / 2 + padding) + i * (2 * padding) * 5 / 6,
+            -WIDTH / 2 + PADDING_SIDE,
+            (-HEIGHT / 2 + PADDING_BOTTOM) + i * (2 * padding) * 5 / 6,
         )
         turtle.pendown()
-        turtle.forward(width - 2 * padding)
+        turtle.forward(WIDTH - 2 * padding)
 
     # Label lanes
     for i in range(1, n_teams + 1):
         turtle.penup()
         turtle.goto(
-            -width / 2 + 20,
+            -WIDTH / 2 + 20,
             (-250 + 500 / 6 / 2) + (i - 1) * (2 * padding) * 5 / 6 - 12,
         )
         turtle.pendown()
