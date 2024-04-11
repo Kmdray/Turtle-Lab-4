@@ -208,6 +208,9 @@ def set_scenery(n_teams: int) -> None:
         turtle.pendown()
         turtle.forward(WIDTH - 2 * PADDING_SIDE)
 
+    # Hide cursor
+    turtle.hideturtle()
+
 
 # functions to perform laps, relay exchanges, size changes
 
