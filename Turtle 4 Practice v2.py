@@ -17,7 +17,10 @@ def move_forward(t):
 # TODO: get # teams, colors. draw racetrack, finish line
 
 def get_input():
-    """Gets number of teams and colors from user."""
+    """
+    Gets number of teams and colors from user.
+    @authors: shane
+    """
     n_teams = int(input("Enter number of teams: "))
     colors_allowed = [
             (255, 0, 0),  # red
@@ -32,12 +35,24 @@ def get_input():
         ]
     return teams
 
+def set_scenery():
+    """
+    Sets up the racetrack and finish line.
+    @authors: shane
+    """
+    pass
+
 # functions to perform laps, relays, size changes, etc.
 
 # functions to decide winner, display results, etc.
 
 # Main function
 def main():
+    """
+    Main function to run the turtle relay race.
+    @authors: kevin
+    """
+
     # get input (number of teams) from user
     teams = get_input()
     print(teams)
