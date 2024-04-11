@@ -1,0 +1,37 @@
+---
+name: lint
+
+"on": [push]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: [ubuntu-latest]
+
+    env:
+      SKIP_VENV: 1
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Fetch main (for incremental diff, lint filter mask)
+        run: git fetch origin main
+
+      - name: Reload Cache / pip
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3
+          cache: "pip" # caching pip dependencies
+          cache-dependency-path: "**/requirements*.txt"
+          update-environment: false
+
+      - name: Install requirements
+        run: make deps
+
+      - name: Lint
+        run: CHANGED_FILES_PY=$(git ls-files *.py) make lint
