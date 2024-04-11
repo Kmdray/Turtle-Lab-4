@@ -188,6 +188,14 @@ def set_scenery(n_teams: int) -> None:
             HEIGHT / 2 - PADDING_TOP,
         )
 
+    # Label lane numbers with team index
+    turtle.color("black")
+    for i in range(1, n_teams + 1):
+        turtle.penup()
+        turtle.goto(-WIDTH / 2 + 20, -12 + center_lane(i))
+        turtle.pendown()
+        turtle.write(i, font=("Arial", 12, "normal"))
+
     # Draw lanes
     turtle.color("black")
     turtle.pensize(2)
@@ -199,13 +207,6 @@ def set_scenery(n_teams: int) -> None:
         )
         turtle.pendown()
         turtle.forward(WIDTH - 2 * PADDING_SIDE)
-
-    # Label lanes with team index number
-    for i in range(1, n_teams + 1):
-        turtle.penup()
-        turtle.goto(-WIDTH / 2 + 20, -12 + center_lane(i))
-        turtle.pendown()
-        turtle.write(i, font=("Arial", 12, "normal"))
 
 
 # functions to perform laps, relay exchanges, size changes
