@@ -127,7 +127,28 @@ def set_scenery() -> None:
     turtle.bgcolor("yellow")
     turtle.title("Turtle Relay Race")
 
-    # TODO: draw racetrack, finish line, scenery, etc.
+    # Draw racetrack
+    turtle.penup()
+    turtle.goto(-350, -250)
+    turtle.pendown()
+    turtle.color("black")
+    turtle.pensize(5)
+    turtle.forward(700)
+    turtle.left(90)
+    turtle.forward(500)
+    turtle.left(90)
+    turtle.forward(700)
+    turtle.left(90)
+    turtle.forward(500)
+    turtle.left(90)
+
+    # Draw lanes
+    turtle.pensize(1)
+    for i in range(1, 6):
+        turtle.penup()
+        turtle.goto(-350, -250 + i * 100 * 5 / 6)
+        turtle.pendown()
+        turtle.forward(700)
 
 
 # functions to perform laps, relays, size changes, etc.
@@ -149,6 +170,8 @@ def main() -> int:
 
     # set up the screen
     set_scenery()
+    # input("Press enter to exit...")
+    # exit()
 
     colors = ["red", "green", "blue", "orange"]
     # Speeds corresponding to colors
