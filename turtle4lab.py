@@ -31,12 +31,30 @@ class Team:
     """Team class to store team information."""
 
     def __init__(
-        self, color: tuple[int, int, int], speeds: tuple[int, int, int, int]
+        self,
+        _id: int,
+        name: str,
+        color: tuple[int, int, int],
+        speeds: tuple[float, float, float, float],
     ) -> None:
+        self.id = _id
+        self.name = name
         self.laps_completed = 0
         self.distance_covered = 0.0
         self.color = color
         self.speeds = speeds
+
+    def __str__(self) -> str:
+        return (
+            f"Team("
+            f"id={self.id},"
+            f" speeds={[round(x, 2) for x in self.speeds]},"
+            f" laps_completed={self.laps_completed},"
+            f" distance_covered={self.distance_covered},"
+            f" color={self.color},"
+            f" name={self.name}"
+            ")"
+        )
 
 
 def get_input() -> list:
@@ -54,16 +72,35 @@ def get_input() -> list:
         (255, 255, 0),  # yellow
         (128, 0, 128),  # purple
     ]
+    names_allowed = [
+        "scarlet speedsters",
+        "green machines",
+        "blue blazers",
+        "orange ocelots",
+        "yellow yaks",
+        "purple panthers",
+    ]
 
     # Get number of teams
     n_teams = int(input("Enter number of teams, between 2 and 6: "))
     if n_teams < 2 or n_teams > 6:
         raise ValueError("Number of teams must be between 2 and 6.")
 
-    # Decide team colors and speeds
+    # Decide team colors, names, and speeds
     teams = []
     for i in range(n_teams):
-        teams.append(Team(colors_allowed[i], (1, 2, 3, 4)))
+        team = Team(
+            _id=i,
+            color=colors_allowed[i],
+            name=names_allowed[i],
+            speeds=(
+                2 + random.random(),
+                3 + random.random(),
+                4 + random.random(),
+                5 + random.random(),
+            ),
+        )
+        teams.append(team)
 
     return teams
 
@@ -96,7 +133,8 @@ def main() -> int:
 
     # get input (number of teams) from user
     teams = get_input()
-    print(teams)
+    for team in teams:
+        print(team)
 
     # set up the screen
     set_scenery()
