@@ -80,8 +80,8 @@ format: _venv	## Format with isort & black
 
 
 LINT_LOCS := ntclient/ tests/ setup.py
-CHANGED_FILES_RST ?= $(shell git diff origin/master --name-only --diff-filter=MACRU \*.rst)
-CHANGED_FILES_PY ?= $(shell git diff origin/master --name-only --diff-filter=MACRU \*.py)
+CHANGED_FILES_RST ?= $(shell git diff origin/main --name-only --diff-filter=MACRU \*.rst)
+CHANGED_FILES_PY ?= $(shell git diff origin/main --name-only --diff-filter=MACRU \*.py)
 CHANGED_FILES_PY_FLAG ?= $(shell if [ "$(CHANGED_FILES_PY)" ]; then echo 1; fi)
 
 .PHONY: lint
