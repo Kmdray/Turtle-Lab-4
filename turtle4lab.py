@@ -116,39 +116,56 @@ def get_input() -> list:
     return teams
 
 
-def set_scenery() -> None:
+def set_scenery(n_teams: int) -> None:
     """
     Sets up the racetrack and finish line.
     @authors: shane
     """
 
-    # Set up the screen
-    turtle.setup(width=800, height=600)
+    width = 800
+    height = 600
+    padding = 50
+
+    turtle.setup(width=width, height=height)
     turtle.bgcolor("yellow")
     turtle.title("Turtle Relay Race")
 
-    # Draw racetrack
+    # Draw rectangular racetrack perimeter
     turtle.penup()
-    turtle.goto(-350, -250)
+    turtle.goto(-width / 2 + padding, -height / 2 + padding)
     turtle.pendown()
     turtle.color("black")
     turtle.pensize(5)
-    turtle.forward(700)
+    turtle.forward(width - 2 * padding)
     turtle.left(90)
-    turtle.forward(500)
+    turtle.forward(height - 2 * padding)
     turtle.left(90)
-    turtle.forward(700)
+    turtle.forward(width - 2 * padding)
     turtle.left(90)
-    turtle.forward(500)
+    turtle.forward(height - 2 * padding)
     turtle.left(90)
 
     # Draw lanes
     turtle.pensize(1)
     for i in range(1, 6):
         turtle.penup()
-        turtle.goto(-350, -250 + i * 100 * 5 / 6)
+        # 5 lines make 6 lanes
+        turtle.goto(
+            -width / 2 + padding,
+            (-height / 2 + padding) + i * (2 * padding) * 5 / 6,
+        )
         turtle.pendown()
-        turtle.forward(700)
+        turtle.forward(width - 2 * padding)
+
+    # Label lanes
+    for i in range(1, n_teams + 1):
+        turtle.penup()
+        turtle.goto(
+            -width / 2 + 20,
+            (-250 + 500 / 6 / 2) + (i - 1) * (2 * padding) * 5 / 6 - 12,
+        )
+        turtle.pendown()
+        turtle.write(i, font=("Arial", 12, "normal"))
 
 
 # functions to perform laps, relays, size changes, etc.
@@ -169,7 +186,7 @@ def main() -> int:
         print(team)
 
     # set up the screen
-    set_scenery()
+    set_scenery(n_teams=len(teams))
     # input("Press enter to exit...")
     # exit()
 
