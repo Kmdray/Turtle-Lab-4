@@ -1,9 +1,17 @@
-import turtle
+"""
+Title: Turtle Relay
+@authors: Kevin, Shane, James, Matt
+"""
+
 import random
+import turtle
 
 
-# Function to create a turtle with specific color and speed
-def create_turtle(color, speed):
+def create_turtle(color: str, speed: float) -> turtle.Turtle:
+    """
+    Function to create a turtle with specific color and speed.
+    @authors: kevin
+    """
     t = turtle.Turtle()
     t.shape("turtle")
     t.color(color)
@@ -11,42 +19,67 @@ def create_turtle(color, speed):
     return t
 
 
-# Function to move the turtle forward
-def move_forward(t):
+def move_forward(t: turtle.Turtle) -> None:
+    """
+    Function to move the turtle forward by 100 units.
+    @authors: kevin
+    """
     t.forward(100)
 
 
-# Function to get input and set landscape/environment
-# TODO: get # teams, colors. draw racetrack, finish line
+class Team:
+    """Team class to store team information."""
+
+    def __init__(
+        self, color: tuple[int, int, int], speeds: tuple[int, int, int, int]
+    ) -> None:
+        self.laps_completed = 0
+        self.distance_covered = 0.0
+        self.color = color
+        self.speeds = speeds
 
 
-def get_input():
+def get_input() -> list:
     """
     Gets number of teams and colors from user.
+    Returns list of Team objects.
+
     @authors: shane
     """
-    n_teams = int(input("Enter number of teams: "))
     colors_allowed = [
         (255, 0, 0),  # red
         (0, 255, 0),  # green
         (0, 0, 255),  # blue
         (255, 165, 0),  # orange
+        (255, 255, 0),  # yellow
+        (128, 0, 128),  # purple
     ]
-    # TODO: are speeds decided here, are they random?
-    teams = [
-        # (laps_completed, distance_covered, color)
-        (0, 0.0, "red")
-        for _ in range(n_teams)
-    ]
+
+    # Get number of teams
+    n_teams = int(input("Enter number of teams, between 2 and 6: "))
+    if n_teams < 2 or n_teams > 6:
+        raise ValueError("Number of teams must be between 2 and 6.")
+
+    # Decide team colors and speeds
+    teams = []
+    for i in range(n_teams):
+        teams.append(Team(colors_allowed[i], (1, 2, 3, 4)))
+
     return teams
 
 
-def set_scenery():
+def set_scenery() -> None:
     """
     Sets up the racetrack and finish line.
     @authors: shane
     """
-    pass
+
+    # Set up the screen
+    turtle.setup(width=800, height=600)
+    turtle.bgcolor("yellow")
+    turtle.title("Turtle Relay Race")
+
+    # TODO: draw racetrack, finish line, scenery, etc.
 
 
 # functions to perform laps, relays, size changes, etc.
@@ -55,7 +88,7 @@ def set_scenery():
 
 
 # Main function
-def main():
+def main() -> int:
     """
     Main function to run the turtle relay race.
     @authors: kevin
@@ -64,12 +97,9 @@ def main():
     # get input (number of teams) from user
     teams = get_input()
     print(teams)
-    exit()
 
-    # Set up the screen
-    turtle.setup(width=800, height=600)
-    turtle.bgcolor("yellow")
-    turtle.title("Turtle Relay Race")
+    # set up the screen
+    set_scenery()
 
     colors = ["red", "green", "blue", "orange"]
     # Speeds corresponding to colors
@@ -97,6 +127,7 @@ def main():
                 t.goto(-350, -100 + colors.index(t.color()) * 50)
 
     turtle.done()
+    return 0
 
 
 if __name__ == "__main__":
