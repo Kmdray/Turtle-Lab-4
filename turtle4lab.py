@@ -121,11 +121,25 @@ def get_input() -> list:
 
 
 # Constants
+N_LANES = 6
+
 WIDTH = 800
 HEIGHT = 600
+
 PADDING_TOP = 50
 PADDING_BOTTOM = 150
 PADDING_SIDE = 50
+
+HEIGHT_LANE = (HEIGHT - PADDING_TOP - PADDING_BOTTOM) / N_LANES
+
+
+def center_lane(n: int) -> float:
+    """
+    Returns the y-coordinate of the center of the nth lane.
+    NOTE: starts at 1.
+    @authors: shane
+    """
+    return -HEIGHT / 2 + PADDING_BOTTOM + HEIGHT_LANE / 2 + (n - 1) * HEIGHT_LANE
 
 
 def set_scenery(n_teams: int) -> None:
@@ -133,8 +147,6 @@ def set_scenery(n_teams: int) -> None:
     Sets up the racetrack and finish line.
     @authors: shane
     """
-    padding = 50
-
     turtle.setup(width=WIDTH, height=HEIGHT)
     turtle.bgcolor("yellow")
     turtle.title("Turtle Relay Race")
@@ -160,18 +172,15 @@ def set_scenery(n_teams: int) -> None:
         turtle.penup()
         turtle.goto(
             -WIDTH / 2 + PADDING_SIDE,
-            (-HEIGHT / 2 + PADDING_BOTTOM) + i * (2 * padding) * 5 / 6,
+            (-HEIGHT / 2 + PADDING_BOTTOM) + i * HEIGHT_LANE,
         )
         turtle.pendown()
-        turtle.forward(WIDTH - 2 * padding)
+        turtle.forward(WIDTH - 2 * PADDING_SIDE)
 
     # Label lanes
     for i in range(1, n_teams + 1):
         turtle.penup()
-        turtle.goto(
-            -WIDTH / 2 + 20,
-            (-250 + 500 / 6 / 2) + (i - 1) * (2 * padding) * 5 / 6 - 12,
-        )
+        turtle.goto(-WIDTH / 2 + 20, -12 + center_lane(i))
         turtle.pendown()
         turtle.write(i, font=("Arial", 12, "normal"))
 
@@ -221,6 +230,7 @@ def main() -> int:
                 # Change turtle color and reset position
                 t.color(random.choice(colors))
                 t.speed(speeds[colors.index(t.color())])
+                # TODO: use new function to get turtle Y-position: center_lane(n: int)
                 t.goto(-350, -100 + colors.index(t.color()) * 50)
 
     turtle.done()
