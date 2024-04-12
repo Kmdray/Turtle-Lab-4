@@ -140,6 +140,7 @@ PADDING_SIDE = 50
 HEIGHT_LANE = (HEIGHT - PADDING_TOP - PADDING_BOTTOM) / N_LANES
 
 FONT_SIZE_LANE_LABELS = 12
+PADDING_LANE_LABEL = 20
 
 
 def center_lane(n: int) -> float:
@@ -194,7 +195,9 @@ def set_scenery(n_teams: int) -> None:
     turtle.color("black")
     for i in range(1, n_teams + 1):
         turtle.penup()
-        turtle.goto(-WIDTH / 2 + 20, center_lane(i) - FONT_SIZE_LANE_LABELS)
+        turtle.goto(
+            -WIDTH / 2 + PADDING_LANE_LABEL, center_lane(i) - FONT_SIZE_LANE_LABELS
+        )
         turtle.pendown()
         turtle.write(i, font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
 
