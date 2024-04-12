@@ -42,6 +42,8 @@ class Team:
     @authors: Shane
     """
 
+    # pylint: disable=too-many-instance-attributes
+
     def __init__(
         self,
         _id: int,
@@ -51,10 +53,13 @@ class Team:
     ) -> None:
         self.id = _id
         self.name = name
-        self.laps_completed = 0
-        self.distance_covered = 0.0
+        self.laps_completed = int()
+        self.distance_covered = float()
         self.color = color
         self.speeds = speeds
+
+        self.turtle: turtle.Turtle | None = None
+        self.win_time: float = float()
 
     def __str__(self) -> str:
         return (
@@ -68,18 +73,26 @@ class Team:
             ")"
         )
 
-    def set_win_time(self, time: float) -> None:
-        """
-        Sets the time to complete (for winning team only)
-        @authors:
-        """
-
     def starting_position(self) -> tuple[float, float]:
         """
         Returns the starting position of the team.
         @authors: Shane
         """
         return -WIDTH / 2 + PADDING_LEFT, lane_n_center_y_pos(self.id)
+
+    def set_turtle(self, _turtle: turtle.Turtle) -> None:
+        """
+        Assigns a turtle to a given team.
+        @authors: Shane
+        """
+        self.turtle = _turtle
+
+    def victory_dance(self) -> None:
+        """
+        Performs a victory dance and displays win time and average speed.
+        @authors:
+        """
+        # self.win_time = ...
 
 
 def get_input() -> list[Team]:
