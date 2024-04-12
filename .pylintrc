@@ -1,3 +1,14 @@
-[TYPECHECK]
-ignored-classes=turtle
+[MASTER]
 
+fail-under=9.95
+
+
+[MESSAGES CONTROL]
+
+disable=
+    fixme,
+
+
+[TYPECHECK]
+
+ignored-classes=turtle

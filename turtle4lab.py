@@ -260,9 +260,9 @@ def main() -> int:
             if t.xcor() >= 350:
                 # Change turtle color and reset position
                 t.color(random.choice(colors))
-                t.speed(speeds[colors.index(t.color())])
+                t.speed(speeds[colors.index(t.color())])  # type: ignore
                 # TODO: use new function to get turtle Y-position: center_lane(n: int)
-                t.goto(-350, -100 + colors.index(t.color()) * 50)
+                t.goto(-350, -100 + colors.index(t.color()) * 50)  # type: ignore
 
     turtle.done()
     return 0
