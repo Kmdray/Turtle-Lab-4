@@ -95,17 +95,17 @@ class Team:
         """
         # self.win_time = ...
 
-    def finish_time():
-        # physically/mathematically calculate time to finish
-        RELAY_LENGTH = TRACK_LENGTH / N_RELAYS
-        total_time = float()
-        for i in range(4):
-            # time = distance / speed
-            total_time += RELAY_LENGTH / self.speeds[i]
-
-        # or use time.time()
-        time.time()
-        # add change to accumulator
+    # def finish_time():
+    #     # physically/mathematically calculate time to finish
+    #     RELAY_LENGTH = TRACK_LENGTH / N_RELAYS
+    #     total_time = float()
+    #     for i in range(4):
+    #         # time = distance / speed
+    #         total_time += RELAY_LENGTH / self.speeds[i]
+    #
+    #     # or use time.time()
+    #     time.time()
+    #     # add change to accumulator
 
 
 def get_input() -> int:
@@ -125,10 +125,6 @@ def get_input() -> int:
         raise ValueError("Number of teams must be between 2 and 6.")
 
     return n_teams
-
-
-    #
-    # return teams
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -228,7 +224,13 @@ def set_scenery(n_teams: int) -> None:
     turtle.hideturtle()
 
 
-# functions to perform laps, relay exchanges, size changes
+# TODO: functions to perform laps, relay exchanges, size changes (James)
+# for team in teams:
+#     for relay in N_RELAYS:
+#         # move forward
+#         # change size
+#         # change color
+#         pass
 
 # functions to decide winner, terminate race, display results
 
@@ -258,46 +260,15 @@ def main() -> int:
 
     # get input (number of teams) from user
     n_teams = get_input()
-    # teams = get_input()
-    # for team in teams:
-    #     print(team)
 
     # set up the screen
     set_scenery(n_teams=n_teams)
-    # turtle.done()
 
-    # Build teams list; decide colors, names, and speeds
+    # TODO: Build teams list; decide colors, names, and speeds (Kevin)
     teams = []
-    for i in range(n_teams):
-        team = Team(
-            # NOTE: this is indexed at 0, but lane labels start at 1.  Fix this?
-            _id=i,
-            color=colors_allowed[i],
-            name=names_allowed[i],
-            speeds=(
-                # TODO: use randint(min, max)
-                # NOTE: turtle speed min: 0, max: 10
-                2 + random.random(),
-                3 + random.random(),
-                4 + random.random(),
-                5 + random.random(),
-            ),
-        )
-        x, y = team.starting_position()
-        # color = team.color
-
-        team0 = [0, 'red', speeds, turtle, 'finish-time'=-1,]
-        team1 = [1, 'blue', speeds, turtle]
-        color = teams[1]
-        t = teams[4]
-        t.forward(100)
-        # team.turtle.setposition(x, y)
-        # team.turtle.forward(100)
-
-        teams.append(team)
 
     # TODO: use Shane's n_teams value to behave accordingly, not just 4 teams
-    #       as is hard-coded below
+    #       as is hard-coded below (Kevin, James)
     # TODO: use Team.starting_position() to center each team (James)
 
     colors = ["red", "green", "blue", "orange"]
@@ -312,7 +283,6 @@ def main() -> int:
         t.penup()
         t.goto(-350, -100 + i * 50)
         t.pendown()
-        t.start_position
 
     # Race loop
 
