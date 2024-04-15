@@ -59,7 +59,7 @@ class Team:
         Returns the starting (x, y) position of the team at the start of the racetrack.
         @authors: Shane
         """
-        return -WIDTH / 2 + PADDING_LEFT, lane_n_center_y_pos(self.id)
+        return TRACK_START_X, lane_n_center_y_pos(self.id)
 
     def victory_dance(self) -> None:
         """
@@ -98,9 +98,13 @@ PADDING_RIGHT = 100
 WIDTH_TRACK = WIDTH - PADDING_LEFT - PADDING_RIGHT
 HEIGHT_TRACK = HEIGHT - PADDING_TOP - PADDING_BOTTOM
 HEIGHT_LANE = HEIGHT_TRACK / N_LANES
+WIDTH_RELAY = WIDTH_TRACK / N_RELAYS
+
+TRACK_START_X = -WIDTH / 2 + PADDING_LEFT
+TRACK_START_Y = -HEIGHT / 2 + PADDING_BOTTOM
 
 FONT_SIZE_LANE_LABELS = 12
-PADDING_LANE_LABEL = 20
+PADDING_LANE_LABEL = 25
 
 COLORS_ALLOWED = [
     (255, 0, 0),  # red
@@ -134,7 +138,7 @@ def set_scenery(n_teams: int) -> None:
 
     # Draw rectangular racetrack perimeter
     turtle.penup()
-    turtle.goto(-WIDTH / 2 + PADDING_LEFT, -HEIGHT / 2 + PADDING_BOTTOM)
+    turtle.goto(TRACK_START_X, TRACK_START_Y)
     turtle.pendown()
     turtle.color("black")
     turtle.pensize(5)
@@ -153,21 +157,22 @@ def set_scenery(n_teams: int) -> None:
     for i in range(1, N_RELAYS):  # 3 lines make 4 relay zones
         turtle.penup()
         turtle.goto(
-            -WIDTH / 2 + PADDING_LEFT + i * WIDTH_TRACK / N_RELAYS,
-            -HEIGHT / 2 + PADDING_BOTTOM,
+            TRACK_START_X + i * WIDTH_RELAY,
+            TRACK_START_Y,
         )
         turtle.pendown()
         turtle.goto(
-            -WIDTH / 2 + PADDING_LEFT + i * WIDTH_TRACK / N_RELAYS,
+            TRACK_START_X + i * WIDTH_RELAY,
             HEIGHT / 2 - PADDING_TOP,
         )
 
     # Label lane numbers with team index
+    # TODO: use team color? (Shane)
     turtle.color("black")
     for i in range(0, n_teams):
         turtle.penup()
         turtle.goto(
-            -WIDTH / 2 + PADDING_LANE_LABEL,
+            TRACK_START_X - PADDING_LANE_LABEL,
             lane_n_center_y_pos(i) - FONT_SIZE_LANE_LABELS,
         )
         turtle.pendown()
@@ -179,8 +184,8 @@ def set_scenery(n_teams: int) -> None:
     for i in range(1, N_LANES):  # 5 lines make 6 lanes
         turtle.penup()
         turtle.goto(
-            -WIDTH / 2 + PADDING_LEFT,
-            -HEIGHT / 2 + PADDING_BOTTOM + i * HEIGHT_LANE,
+            TRACK_START_X,
+            TRACK_START_Y + i * HEIGHT_LANE,
         )
         turtle.pendown()
         turtle.forward(WIDTH_TRACK)
@@ -210,7 +215,7 @@ def get_input_for_number_of_teams() -> int:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Race/relay functions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# TODO: functions to perform laps, relay exchanges, size changes (James)
+# TODO: functions to perform laps, relay exchanges, size changes (James, Matt)
 # for team in teams:
 #     for relay in N_RELAYS:
 #         # move forward
@@ -233,7 +238,7 @@ def lane_n_center_y_pos(n: int) -> float:
     Returns the y-coordinate of the center of the nth lane. NOTE: starts at 0.
     @authors: Shane
     """
-    return -HEIGHT / 2 + PADDING_BOTTOM + HEIGHT_LANE / 2 + n * HEIGHT_LANE
+    return TRACK_START_Y + HEIGHT_LANE / 2 + n * HEIGHT_LANE
 
 
 def create_turtle(color: str, speed: float) -> turtle.Turtle:
