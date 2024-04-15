@@ -281,6 +281,7 @@ def main() -> int:
 
     # TODO: use Shane's n_teams value to behave accordingly, not just 4 teams
     #       as is hard-coded below (Kevin, James)
+    # TODO: use COLORS_ALLOWED/NAMES_ALLOWED to generate all 6 (Kevin, James, Matt)
     colors = ["red", "green", "blue", "orange"]
     # Speeds corresponding to colors
     speeds = [1, 2, 3, 4]
@@ -296,7 +297,7 @@ def main() -> int:
         t.pendown()
 
     # Race loop
-    # TODO: expand this functionality, track time to finish, race given # turtles, etc
+    # TODO: expand this functionality/track time to finish/co-ordinate functions (Kevin)
     # for team in teams:
     #     team.turtle(...)
     #     team.finish_time = now()
