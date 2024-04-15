@@ -75,36 +75,36 @@ deps: _venv	## Install requirements
 
 .PHONY: format
 format: _venv	## Format with isort & black
-	if [ "${CHANGED_FILES_PY_FLAG}" ]; then isort ${CHANGED_FILES_PY} ; fi
-	if [ "${CHANGED_FILES_PY_FLAG}" ]; then black ${CHANGED_FILES_PY} ; fi
+	isort ${CHANGED_FILES_PY}
+	black ${CHANGED_FILES_PY}
 
 
-LINT_LOCS := ntclient/ tests/ setup.py
-CHANGED_FILES_RST ?= $(shell git diff origin/main --name-only --diff-filter=MACRU \*.rst)
-CHANGED_FILES_PY ?= $(shell git diff origin/main --name-only --diff-filter=MACRU \*.py)
-CHANGED_FILES_PY_FLAG ?= $(shell if [ "$(CHANGED_FILES_PY)" ]; then echo 1; fi)
+CHANGED_FILES_RST ?= $(shell git ls-files \*.rst)
+CHANGED_FILES_PY ?= $(shell git ls-files \*.py -- ':!:james/')
+# CHANGED_FILES_PY ?= $(shell git diff origin/main --name-only --diff-filter=MACRU \*.py)
+# CHANGED_FILES_PY_FLAG ?= $(shell if [ "$(CHANGED_FILES_PY)" ]; then echo 1; fi)
 
 .PHONY: lint
 lint: _venv	## Lint code and documentation
 	# lint RST
-	if [ "${CHANGED_FILES_RST}" ]; then doc8 --quiet ${CHANGED_FILES_RST}; fi
+	doc8 --quiet ${CHANGED_FILES_RST}
 	# check formatting: Python
-	if [ "${CHANGED_FILES_PY_FLAG}" ]; then isort --diff --check ${CHANGED_FILES_PY} ; fi
-	if [ "${CHANGED_FILES_PY_FLAG}" ]; then black --check ${CHANGED_FILES_PY} ; fi
+	isort --diff --check ${CHANGED_FILES_PY}
+	black --check ${CHANGED_FILES_PY}
 	# lint Python
-	if [ "${CHANGED_FILES_PY_FLAG}" ]; then pycodestyle --statistics ${CHANGED_FILES_PY}; fi
-	if [ "${CHANGED_FILES_PY_FLAG}" ]; then bandit -q -c .banditrc -r ${CHANGED_FILES_PY}; fi
-	if [ "${CHANGED_FILES_PY_FLAG}" ]; then flake8 ${CHANGED_FILES_PY}; fi
-	if [ "${CHANGED_FILES_PY_FLAG}" ]; then mypy ${CHANGED_FILES_PY}; fi
-	if [ "${CHANGED_FILES_PY_FLAG}" ]; then pylint ${CHANGED_FILES_PY}; fi
+	pycodestyle --statistics ${CHANGED_FILES_PY}
+	bandit -q -c .banditrc -r ${CHANGED_FILES_PY}
+	flake8 ${CHANGED_FILES_PY}
+	mypy ${CHANGED_FILES_PY}
+	pylint ${CHANGED_FILES_PY}
 
 .PHONY: pylint
 pylint:
-	if [ "${CHANGED_FILES_PY_FLAG}" ]; then pylint ${CHANGED_FILES_PY}; fi
+	pylint ${CHANGED_FILES_PY}
 
 .PHONY: mypy
 mypy:
-	if [ "${CHANGED_FILES_PY_FLAG}" ]; then mypy ${CHANGED_FILES_PY}; fi
+	mypy ${CHANGED_FILES_PY}
 
 
 # .PHONY: test

@@ -16,59 +16,39 @@ import sys
 import turtle
 
 
-def create_turtle(color: str, speed: float) -> turtle.Turtle:
-    """
-    Function to create a turtle with specific color and speed.
-    @authors: Kevin
-    """
-    t = turtle.Turtle()
-    t.shape("turtle")
-    t.color(color)
-    t.speed(speed)
-    return t
-
-
-def move_forward(t: turtle.Turtle) -> None:
-    """
-    Function to move the turtle forward by 100 units.
-    @authors: Kevin
-    """
-    t.forward(100)
-
-
 class Team:
     """
     Team class to store team information.
     @authors: Shane
     """
 
-    # pylint: disable=too-many-instance-attributes
-
     def __init__(
         self,
-        _id: int,
+        id: int,
         name: str,
         color: tuple[int, int, int],
         speeds: tuple[float, float, float, float],
+        # turtle: turtle.Turtle,
     ) -> None:
-        self.id = _id
+        self.id = id
         self.name = name
-        self.laps_completed = int()
-        self.distance_covered = float()
         self.color = color
         self.speeds = speeds
+        # TODO: fill this in if we're using time.time() (James)
+        # self.start_time = ...
 
         # TODO: assign turtle to team at creation (Kevin)
-        self.turtle: turtle.Turtle | None = None
-        self.win_time: float = float()
+        # self.turtle = turtle
+        self.race_time: float = float()
+        self.relay_exchanges_completed = int()
+        # self.distance_covered = float()
 
     def __str__(self) -> str:
+        """Shows details for the team"""
         return (
             f"Team("
             f"id={self.id},"
             f" speeds={[round(x, 2) for x in self.speeds]},"
-            f" laps_completed={self.laps_completed},"
-            f" distance_covered={self.distance_covered},"
             f" color={self.color},"
             f" name={self.name}"
             ")"
@@ -76,26 +56,19 @@ class Team:
 
     def starting_position(self) -> tuple[float, float]:
         """
-        Returns the starting position of the team.
+        Returns the starting (x, y) position of the team at the start of the racetrack.
         @authors: Shane
         """
         return -WIDTH / 2 + PADDING_LEFT, lane_n_center_y_pos(self.id)
 
-    def set_turtle(self, _turtle: turtle.Turtle) -> None:
-        """
-        Assigns a turtle to a given team.
-        @authors: Shane
-        """
-        self.turtle = _turtle
-
     def victory_dance(self) -> None:
         """
         Performs a victory dance and displays win time and average speed.
-        @authors:
+        @authors: Matt?
         """
         # self.win_time = ...
 
-    # def finish_time():
+    # def finish_time(t2):
     #     # physically/mathematically calculate time to finish
     #     RELAY_LENGTH = TRACK_LENGTH / N_RELAYS
     #     total_time = float()
@@ -103,28 +76,9 @@ class Team:
     #         # time = distance / speed
     #         total_time += RELAY_LENGTH / self.speeds[i]
     #
-    #     # or use time.time()
-    #     time.time()
-    #     # add change to accumulator
-
-
-def get_input() -> int:
-    """
-    Gets number of teams and colors from user.
-    Returns list of Team objects.
-
-    @authors: Shane
-    """
-
-    # Get number of teams
-    if os.environ.get("N_TEAMS"):
-        n_teams = int(os.environ["N_TEAMS"])
-    else:
-        n_teams = int(input("Enter number of teams, between 2 and 6: "))
-    if n_teams < 2 or n_teams > 6:
-        raise ValueError("Number of teams must be between 2 and 6.")
-
-    return n_teams
+    #     # or use time.time() to track elapsed time
+    #     t1 = time.time()
+    #     # do relay
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -148,16 +102,27 @@ HEIGHT_LANE = HEIGHT_TRACK / N_LANES
 FONT_SIZE_LANE_LABELS = 12
 PADDING_LANE_LABEL = 20
 
+COLORS_ALLOWED = [
+    (255, 0, 0),  # red
+    (0, 255, 0),  # green
+    (0, 0, 255),  # blue
+    (255, 165, 0),  # orange
+    (255, 255, 0),  # yellow
+    (128, 0, 128),  # purple
+]
+NAMES_ALLOWED = [
+    "scarlet speedsters",
+    "green machines",
+    "blue blazers",
+    "orange ocelots",
+    "yellow yaks",
+    "purple panthers",
+]
 
-def lane_n_center_y_pos(n: int) -> float:
-    """
-    Returns the y-coordinate of the center of the nth lane.
-    NOTE: starts at 1.
-    @authors: Shane
-    """
-    return -HEIGHT / 2 + PADDING_BOTTOM + HEIGHT_LANE / 2 + (n - 1) * HEIGHT_LANE
 
-
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Input & setup functions
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def set_scenery(n_teams: int) -> None:
     """
     Sets up the racetrack and finish line.
@@ -199,7 +164,7 @@ def set_scenery(n_teams: int) -> None:
 
     # Label lane numbers with team index
     turtle.color("black")
-    for i in range(1, n_teams + 1):
+    for i in range(0, n_teams):
         turtle.penup()
         turtle.goto(
             -WIDTH / 2 + PADDING_LANE_LABEL,
@@ -224,6 +189,27 @@ def set_scenery(n_teams: int) -> None:
     turtle.hideturtle()
 
 
+def get_input_for_number_of_teams() -> int:
+    """
+    Gets number of teams from user input.
+    @authors: Shane
+    """
+    # Get number of teams
+    if os.environ.get("N_TEAMS"):
+        n_teams = int(os.environ["N_TEAMS"])
+    else:
+        n_teams = int(input("Enter number of teams, between 2 and 6: "))
+
+    # Verify it's between two and six
+    if n_teams < 2 or n_teams > 6:
+        raise ValueError("Number of teams must be between 2 and 6.")
+
+    return n_teams
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Race/relay functions
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # TODO: functions to perform laps, relay exchanges, size changes (James)
 # for team in teams:
 #     for relay in N_RELAYS:
@@ -232,26 +218,47 @@ def set_scenery(n_teams: int) -> None:
 #         # change color
 #         pass
 
-# functions to decide winner, terminate race, display results
 
-colors_allowed = [
-    (255, 0, 0),  # red
-    (0, 255, 0),  # green
-    (0, 0, 255),  # blue
-    (255, 165, 0),  # orange
-    (255, 255, 0),  # yellow
-    (128, 0, 128),  # purple
-]
-names_allowed = [
-    "scarlet speedsters",
-    "green machines",
-    "blue blazers",
-    "orange ocelots",
-    "yellow yaks",
-    "purple panthers",
-]
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Wrap up & show winner functions
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# TODO: functions to decide winner, terminate race, display results (Matt)
 
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Helper functions
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def lane_n_center_y_pos(n: int) -> float:
+    """
+    Returns the y-coordinate of the center of the nth lane. NOTE: starts at 0.
+    @authors: Shane
+    """
+    return -HEIGHT / 2 + PADDING_BOTTOM + HEIGHT_LANE / 2 + n * HEIGHT_LANE
+
+
+def create_turtle(color: str, speed: float) -> turtle.Turtle:
+    """
+    Function to create a turtle with specific color and speed.
+    @authors: Kevin
+    """
+    t = turtle.Turtle()
+    t.shape("turtle")
+    t.color(color)
+    t.speed(speed)
+    return t
+
+
+def move_forward(t: turtle.Turtle) -> None:
+    """
+    Function to move the turtle forward by 100 units.
+    @authors: Kevin
+    """
+    t.forward(100)
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Main function
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def main() -> int:
     """
     Main function to run the turtle relay race.
@@ -259,18 +266,16 @@ def main() -> int:
     """
 
     # get input (number of teams) from user
-    n_teams = get_input()
+    n_teams = get_input_for_number_of_teams()
 
     # set up the screen
     set_scenery(n_teams=n_teams)
 
-    # TODO: Build teams list; decide colors, names, and speeds (Kevin)
-    teams = []
+    # TODO: Build teams list; assign id, color, name, speeds; allocate time (Matt?)
+    # teams = [build_team(i) for i in range(n_teams)]
 
     # TODO: use Shane's n_teams value to behave accordingly, not just 4 teams
     #       as is hard-coded below (Kevin, James)
-    # TODO: use Team.starting_position() to center each team (James)
-
     colors = ["red", "green", "blue", "orange"]
     # Speeds corresponding to colors
     speeds = [1, 2, 3, 4]
@@ -279,13 +284,14 @@ def main() -> int:
     turtles = [create_turtle(color, speed) for color, speed in zip(colors, speeds)]
 
     # Set starting positions
+    # TODO: use lane_n_center_y_pos() to center each team's turtle & start race (James)
     for i, t in enumerate(turtles):
         t.penup()
         t.goto(-350, -100 + i * 50)
         t.pendown()
 
     # Race loop
-
+    # TODO: expand this functionality, track time to finish, race given # turtles, etc
     # for team in teams:
     #     team.turtle(...)
     #     team.finish_time = now()
@@ -302,9 +308,13 @@ def main() -> int:
                 # TODO: use new function to get Y-position: lane_n_center_y_pos(n: int)
                 t.goto(-350, -100 + colors.index(t.color()) * 50)  # type: ignore
 
+    # finish program
     turtle.done()
     return 0
 
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Call main
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 if __name__ == "__main__":
     sys.exit(main())
