@@ -141,7 +141,7 @@ def set_scenery(n_teams: int) -> None:
     @authors: Shane
     """
     turtle.setup(width=WIDTH, height=HEIGHT)
-    turtle.bgcolor("yellow")
+    turtle.bgcolor("lightblue")
     turtle.title("Turtle Relay Race")
 
     # Draw rectangular racetrack perimeter
