@@ -107,12 +107,12 @@ FONT_SIZE_LANE_LABELS = 12
 PADDING_LANE_LABEL = 25
 
 COLORS_ALLOWED = [
-    (255, 0, 0),  # red
-    (0, 255, 0),  # green
-    (0, 0, 255),  # blue
-    (255, 165, 0),  # orange
-    (255, 255, 0),  # yellow
-    (128, 0, 128),  # purple
+    ("red"),  # red
+    ("green"),  # green
+    ("blue"),  # blue
+    ("orange"),  # orange
+    ("yellow"),  # yellow
+    ("purple"),  # purple
 ]
 NAMES_ALLOWED = [
     "scarlet speedsters",
