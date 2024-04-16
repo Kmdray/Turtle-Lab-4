@@ -122,6 +122,14 @@ NAMES_ALLOWED = [
     "yellow yaks",
     "purple panthers",
 ]
+SPEEDS_ALLOWED = [
+  random.randint(1,10),
+  random.randint(1,10),
+  random.randint(1,10),
+  random.randint(1,10),
+  random.randint(1,10),
+  random.randint(1,10),
+]
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -282,12 +290,9 @@ def main() -> int:
     # TODO: use Shane's n_teams value to behave accordingly, not just 4 teams
     #       as is hard-coded below (Kevin, James)
     # TODO: use COLORS_ALLOWED/NAMES_ALLOWED to generate all 6 (Kevin, James, Matt)
-    colors = ["red", "green", "blue", "orange"]
-    # Speeds corresponding to colors
-    speeds = [1, 2, 3, 4]
 
     # Create turtles with specific colors and speeds
-    turtles = [create_turtle(color, speed) for color, speed in zip(colors, speeds)]
+    turtles = [create_turtle(color, speed) for color, speed in zip(COLORS_ALLOWED, SPEEDS_ALLOWED)]
 
     # Set starting positions
     # TODO: use lane_n_center_y_pos() to center each team's turtle & start race (James)
