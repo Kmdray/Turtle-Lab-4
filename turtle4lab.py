@@ -298,7 +298,7 @@ def main() -> int:
     # TODO: use lane_n_center_y_pos() to center each team's turtle & start race (James)
     for i, t in enumerate(turtles):
         t.penup()
-        t.goto(-350, -100 + i * 50)
+        t.goto(-350, -100 + i * 75)
         t.pendown()
 
     # Race loop
