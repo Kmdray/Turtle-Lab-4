@@ -323,12 +323,6 @@ def main() -> int:
         print(f"Lap {lap}:")
         for t in turtles:
             move_forward(t)
-            if t.xcor() >= 350:
-                # Change turtle color and reset position
-                t.color(random.choice(colors))
-                t.speed(speeds[colors.index(t.color())])  # type: ignore
-                # TODO: use new function to get Y-position: lane_n_center_y_pos(n: int)
-                t.goto(-350, -100 + colors.index(t.color()) * 50)  # type: ignore
 
     # finish program
     turtle.done()
