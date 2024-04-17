@@ -130,7 +130,14 @@ SPEEDS_ALLOWED = [
   random.randint(1,10),
   random.randint(1,10),
 ]
-
+TIMES_TAKEN = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+]
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Input & setup functions
@@ -268,6 +275,22 @@ def move_forward(t: turtle.Turtle) -> None:
     """
     t.forward(100)
 
+def run_race() -> None:
+    """
+    Main function to run race.
+    @authors: James
+    """
+
+    laps = 4
+    for lap in range(1, laps + 1):
+        print(f"Lap {lap}:")
+        for t in turtles:
+            move_forward(t)
+
+
+def display_results() -> None:
+    """Display results and winner."""
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Main function
@@ -297,11 +320,6 @@ def main() -> int:
     # TODO: use Shane's n_teams value to behave accordingly, not just 4 teams
     #       as is hard-coded below (Kevin, James)
     # TODO: use COLORS_ALLOWED/NAMES_ALLOWED to generate all 6 (Kevin, James, Matt)
-  
-    # Call lane_n_center_y_pos(n) for each team
-    for i in range(n_teams):
-        lane_n_center_y_pos(i)
-      
     # Create turtles with specific colors and speeds
     turtles = [create_turtle(color, speed) for color, speed in zip(COLORS_ALLOWED, SPEEDS_ALLOWED)]
 
@@ -309,20 +327,14 @@ def main() -> int:
     # TODO: use lane_n_center_y_pos() to center each team's turtle & start race (James)
     for i, t in enumerate(turtles):
         t.penup()
-        t.goto(-350, -113 + i * 65)
+        t.goto(TRACK_START_X, lane_n_center_y_pos(i))
         t.pendown()
 
     # Race loop
-    # TODO: expand this functionality/track time to finish/co-ordinate functions (Kevin)
-    # for team in teams:
-    #     team.turtle(...)
-    #     team.finish_time = now()
+    run_race()
 
-    laps = 4
-    for lap in range(1, laps + 1):
-        print(f"Lap {lap}:")
-        for t in turtles:
-            move_forward(t)
+    # display results and winner
+    display_results()
 
     # finish program
     turtle.done()
