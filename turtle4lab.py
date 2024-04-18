@@ -35,7 +35,9 @@ HEIGHT_LANE = HEIGHT_TRACK / N_LANES
 WIDTH_RELAY = WIDTH_TRACK / N_RELAYS
 
 TRACK_START_X = -WIDTH / 2 + PADDING_LEFT
+TRACK_END_X = TRACK_START_X + WIDTH_TRACK
 TRACK_START_Y = -HEIGHT / 2 + PADDING_BOTTOM
+TRACK_END_Y = TRACK_START_Y + HEIGHT_TRACK
 
 FONT_SIZE_LANE_LABELS = 12
 PADDING_LANE_LABEL = 25
@@ -107,12 +109,13 @@ def set_scenery(n_teams: int) -> None:
         turtle.penup()
         turtle.goto(
             TRACK_START_X + i * WIDTH_RELAY,
-            TRACK_START_Y,
+            [TRACK_START_Y, TRACK_END_Y][(i - 1) % 2],
         )
         turtle.pendown()
         turtle.goto(
             TRACK_START_X + i * WIDTH_RELAY,
-            HEIGHT / 2 - PADDING_TOP,
+            [TRACK_END_Y, TRACK_START_Y][(i - 1) % 2],
+            # (-1) ** (i - 1) * HEIGHT / 2 - [PADDING_TOP, PADDING_BOTTOM][(i - 1) % 2],
         )
 
     # Label lane numbers with team index
