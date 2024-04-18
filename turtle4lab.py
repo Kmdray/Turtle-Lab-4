@@ -162,24 +162,6 @@ def get_input_for_number_of_teams() -> int:
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Race/relay functions
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# TODO: functions to perform laps, relay exchanges, size changes (James, Matt)
-# for team in teams:
-#     for relay in N_RELAYS:
-#         # move forward
-#         # change size
-#         # change color
-#         pass
-
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Wrap up & show winner functions
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# TODO: functions to decide winner, terminate race, display results (Matt)
-
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Helper functions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def lane_n_center_y_pos(n: int) -> float:
@@ -205,10 +187,15 @@ def create_turtle(color: str, speed: float) -> turtle.Turtle:
 def move_forward(t: turtle.Turtle) -> None:
     """
     Function to move the turtle forward by 100 units.
+    @TODO: remove this, it's an unused function now.
     @authors: Kevin
     """
     t.forward(100)
 
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Main race/relay function
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def run_race() -> None:
     """
     Main function to run race.
@@ -222,8 +209,14 @@ def run_race() -> None:
             move_forward(t)
 
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Wrap up & show winner function
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def display_results() -> None:
-    """Display results and winner."""
+    """
+    Display results and winner.
+    @authors: Matt
+    """
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
