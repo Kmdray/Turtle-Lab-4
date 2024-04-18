@@ -105,17 +105,16 @@ def set_scenery(n_teams: int) -> None:
     # Draw relay exchange zones
     turtle.color("red")
     turtle.pensize(1)
-    for i in range(1, N_RELAYS):  # 3 lines make 4 relay zones
+    for i in range(N_RELAYS - 1):  # 3 lines make 4 relay zones
         turtle.penup()
         turtle.goto(
-            TRACK_START_X + i * WIDTH_RELAY,
-            [TRACK_START_Y, TRACK_END_Y][(i - 1) % 2],
+            TRACK_START_X + (i + 1) * WIDTH_RELAY,
+            [TRACK_START_Y, TRACK_END_Y][i % 2],
         )
         turtle.pendown()
         turtle.goto(
-            TRACK_START_X + i * WIDTH_RELAY,
-            [TRACK_END_Y, TRACK_START_Y][(i - 1) % 2],
-            # (-1) ** (i - 1) * HEIGHT / 2 - [PADDING_TOP, PADDING_BOTTOM][(i - 1) % 2],
+            TRACK_START_X + (i + 1) * WIDTH_RELAY,
+            [TRACK_END_Y, TRACK_START_Y][i % 2],
         )
 
     # Label lane numbers with team index
@@ -133,14 +132,15 @@ def set_scenery(n_teams: int) -> None:
     # Draw lanes
     turtle.color("black")
     turtle.pensize(2)
-    for i in range(1, N_LANES):  # 5 lines make 6 lanes
+    for i in range(N_LANES - 1):  # 5 lines make 6 lanes
         turtle.penup()
         turtle.goto(
-            TRACK_START_X,
-            TRACK_START_Y + i * HEIGHT_LANE,
+            [TRACK_START_X, TRACK_END_X][i % 2],
+            TRACK_START_Y + (i + 1) * HEIGHT_LANE,
         )
         turtle.pendown()
         turtle.forward(WIDTH_TRACK)
+        turtle.left(180)
 
     # Hide cursor
     turtle.hideturtle()
