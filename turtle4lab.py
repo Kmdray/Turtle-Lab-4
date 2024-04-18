@@ -10,7 +10,6 @@ Description:    This program simulates a relay race between multiple teams using
 
 @authors: Kevin, Shane, James, Matt
 """
-import os
 import random
 import sys
 import turtle
@@ -152,10 +151,7 @@ def get_input_for_number_of_teams() -> int:
     @authors: Shane
     """
     # Get number of teams
-    if os.environ.get("N_TEAMS"):
-        n_teams = int(os.environ["N_TEAMS"])
-    else:
-        n_teams = int(input("Enter number of teams, between 2 and 6: "))
+    n_teams = int(input("Enter number of teams, between 2 and 6: "))
 
     # Verify it's between two and six
     if n_teams < 2 or n_teams > 6:
@@ -237,7 +233,7 @@ def main() -> int:
     # lane_n_center_y_pos(n: int) #Call - lane n center
     # create_turtle(color: str, speed: float) #Call - create turtle
     # move_forward(t: turtle.Turtle) #Call - move forward
-  
+
     # get input (number of teams) from user
     n_teams = get_input_for_number_of_teams()
 
