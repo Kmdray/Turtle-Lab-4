@@ -77,7 +77,7 @@ TIMES_TAKEN = [
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Input & setup functions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def set_scenery(n_teams: int) -> None:
+def set_scenery(n_teams):
     """
     Sets up the racetrack and finish line.
     @authors: Shane
@@ -145,7 +145,7 @@ def set_scenery(n_teams: int) -> None:
     turtle.hideturtle()
 
 
-def get_input_for_number_of_teams() -> int:
+def get_input_for_number_of_teams():
     """
     Gets number of teams from user input.
     @authors: Shane
@@ -163,7 +163,7 @@ def get_input_for_number_of_teams() -> int:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Helper functions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def lane_n_center_y_pos(n: int) -> float:
+def lane_n_center_y_pos(n):
     """
     Returns the y-coordinate of the center of the nth lane. NOTE: starts at 0.
     @authors: Shane
@@ -171,7 +171,7 @@ def lane_n_center_y_pos(n: int) -> float:
     return TRACK_START_Y + HEIGHT_LANE / 2 + n * HEIGHT_LANE
 
 
-def create_turtle(color: str, speed: float) -> turtle.Turtle:
+def create_turtle(color, speed):
     """
     Function to create a turtle with specific color and speed.
     @authors: Kevin
@@ -183,7 +183,7 @@ def create_turtle(color: str, speed: float) -> turtle.Turtle:
     return t
 
 
-def move_forward(t: turtle.Turtle) -> None:
+def move_forward(t):
     """
     Function to move the turtle forward by 100 units.
     @TODO: remove this, it's an unused function now.
@@ -195,7 +195,7 @@ def move_forward(t: turtle.Turtle) -> None:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Main race/relay function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def run_race() -> None:
+def run_race():
     """
     Main function to run race.
     @authors: James
@@ -211,7 +211,7 @@ def run_race() -> None:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Wrap up & show winner function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def display_results() -> None:
+def display_results():
     """
     Display results and winner.
     @authors: Matt
@@ -221,7 +221,7 @@ def display_results() -> None:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Main function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def main() -> int:
+def main():
     """
     Main function to run the turtle relay race.
     @authors: Kevin
