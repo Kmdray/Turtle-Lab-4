@@ -7,7 +7,7 @@ fail-under=9.95
 
 disable=
     fixme,
-
+    redefined-builtin,
 
 [TYPECHECK]
 
