@@ -172,15 +172,14 @@ def lane_n_center_y_pos(n):
     return TRACK_START_Y + HEIGHT_LANE / 2 + n * HEIGHT_LANE
 
 
-def create_turtle(color, speed):
+def create_turtle(color):
     """
-    Function to create a turtle with specific color and speed.
+    Function to create a turtle with specific color.
     @authors: Kevin
     """
     t = turtle.Turtle()
     t.shape("turtle")
     t.color(color)
-    t.speed(speed)
     return t
 
 
@@ -297,8 +296,13 @@ def main():
     #       as is hard-coded below (Kevin, James)
     # TODO: use COLORS_ALLOWED/NAMES_ALLOWED to generate all 6 (Kevin, James, Matt)
     # Create turtles with specific colors and speeds
-    turtles = [create_turtle(color, speed) for color, speed in zip(COLORS_ALLOWED, SPEEDS_ALLOWED)]
-
+    # turtles = [create_turtle(color, speed) for color, speed in zip(COLORS_ALLOWED, SPEEDS_ALLOWED)]
+    # turtles = turtles[:n_teams]
+    turtles = []
+    for i in range(n_teams):
+        turtles.append(
+            create_turtle(COLORS_ALLOWED[i])
+        )
     # Set starting positions
     # TODO: use lane_n_center_y_pos() to center each team's turtle & start race (James)
     for i, t in enumerate(turtles):
