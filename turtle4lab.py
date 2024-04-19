@@ -196,44 +196,29 @@ def move_forward(t):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Main race/relay function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def run_race(n_teams):
+def run_race(turtles):
     # Local variables
     speed = int()
     one_time = float()
     trtl_height = float()
     trtl_width = float()
-    
+
     # Create Timer
     timer_text = turtle.Turtle()
     timer_text.hideturtle()
-    
 
     # Declare teams and timers lists 
-    teams = [""] * n_teams
-    timers = [""] * len(teams)
-
-##################################################################    
-##    # Load teams list for correct number of teams
-##    for i in range (0, n_teams):
-##        teams[i] = turtles[i]
-##        print(locals())
-    
-##    # Set starting positions
-##    for i, t in enumerate(teams):
-##        t.speed(7)
-##        t.penup()
-##        t.goto(TRACK_START_X, lane_n_center_y_pos(i))
-##        t.pendown()
-########################################################################
+    # teams = [""] * n_teams
+    timers = [float()] * len(turtles)
 
     # Create runners and Set starting positions
-    for team in range(0, len(teams)):
-        t = turtle.Turtle()
+    for i, t in enumerate(turtles):
+        # t = turtle.Turtle()
         t.shape('turtle')
-        t.color(COLORS_ALLOWED[team])
+        t.color(COLORS_ALLOWED[i])
         t.speed(7)
         t.penup()
-        t.goto(TRACK_START_X, lane_n_center_y_pos(team))
+        t.goto(TRACK_START_X, lane_n_center_y_pos(i))
         t.pendown()
         
         #Initialize turtle and time
@@ -266,7 +251,7 @@ def run_race(n_teams):
 
         #Capture and display the timer for the team.
         one_time = "%0.3f" %(time.time() - start)
-        timers[team] = one_time
+        timers[i] = one_time
 ##        timer_text.write("Time: " + "%0.2f" %(time.time() - start),align="center", font=("Courier", 30,))
         #End Outer Race Loop
 
@@ -322,7 +307,7 @@ def main():
         t.pendown()
 
     # Race loop
-    run_race(n_teams)
+    run_race(turtles)
 
     # display results and winner
     display_results()
