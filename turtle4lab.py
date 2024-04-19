@@ -12,6 +12,7 @@ Description:    This program simulates a relay race between multiple teams using
 """
 import random
 import sys
+import time
 import turtle
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -195,17 +196,81 @@ def move_forward(t):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Main race/relay function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def run_race():
-    """
-    Main function to run race.
-    @authors: James
-    """
+def run_race(n_teams):
+    # Local variables
+    speed = int()
+    one_time = float()
+    trtl_height = float()
+    trtl_width = float()
+    
+    # Create Timer
+    timer_text = turtle.Turtle()
+    timer_text.hideturtle()
+    
 
-    laps = 4
-    for lap in range(1, laps + 1):
-        print(f"Lap {lap}:")
-        for t in turtles:
-            move_forward(t)
+    # Declare teams and timers lists 
+    teams = [""] * n_teams
+    timers = [""] * len(teams)
+
+##################################################################    
+##    # Load teams list for correct number of teams
+##    for i in range (0, n_teams):
+##        teams[i] = turtles[i]
+##        print(locals())
+    
+##    # Set starting positions
+##    for i, t in enumerate(teams):
+##        t.speed(7)
+##        t.penup()
+##        t.goto(TRACK_START_X, lane_n_center_y_pos(i))
+##        t.pendown()
+########################################################################
+
+    # Create runners and Set starting positions
+    for team in range(0, len(teams)):
+        t = turtle.Turtle()
+        t.shape('turtle')
+        t.color(COLORS_ALLOWED[team])
+        t.speed(7)
+        t.penup()
+        t.goto(TRACK_START_X, lane_n_center_y_pos(team))
+        t.pendown()
+        
+        #Initialize turtle and time
+        trtl_height = 0.5
+        trtl_width = 0.5
+        pen_size = 1
+        timer_text.clear()
+
+        # Start the timer for the team currently running
+        start = time.time()
+        
+        # Inner Race Loop (to draw the racers running)
+        for lap in range (0, 4):
+            speed  = random.randint(1,10) / 5
+            # Increases turtle size on each lap.
+            trtl_width = trtl_width + 0.25
+            trtl_height = trtl_height + 0.25
+                    
+            #set the pen size and runner speed
+            t.shapesize(trtl_width,trtl_height, 1) 
+            t.pensize(pen_size)
+            t.speed(speed)
+            
+            # Run the turtle
+            t.forward(WIDTH_RELAY)
+
+            # Increase pen size for each runner.
+            pen_size = pen_size + 2
+            #end Inner Race Loop
+
+        #Capture and display the timer for the team.
+        one_time = "%0.3f" %(time.time() - start)
+        timers[team] = one_time
+##        timer_text.write("Time: " + "%0.2f" %(time.time() - start),align="center", font=("Courier", 30,))
+        #End Outer Race Loop
+
+    return timers
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -257,7 +322,7 @@ def main():
         t.pendown()
 
     # Race loop
-    run_race()
+    run_race(n_teams)
 
     # display results and winner
     display_results()
