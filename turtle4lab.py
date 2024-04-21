@@ -257,11 +257,13 @@ def display_results(times_taken):
     lowest_time = float() 
     lowest = str()
     winner = lowest
-    #Move turtle
-    t.penup()
-    t.goto(0,0) 
+    t = turtle.Turtle()
+    #Label times 
+    for i in range(0,len(times_taken):        
+        t.goto(TRACK_END_X + PADDING_LANE_LABEL, lane_n_center_y_pos(i))
+        t.write(times_taken[i])
     #Loop to find the lowest time
-    for x in range(0,len(TIMES_TAKEN)):
+    for x in range(0,len(times_taken)):
         if times_taken[x] < lowest_time:
             lowest_time = times_taken[x]      
     #If statement that prints winner and time to the screen
