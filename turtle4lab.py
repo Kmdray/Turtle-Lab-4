@@ -248,13 +248,11 @@ def run_race(TEAMS):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Wrap up & show winner function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def display_results():
+def display_results(TIMES_TAKEN):
     """
     Display results and winner.
     @authors: Matt
     """
-def display_results(TIMES_TAKEN) -> None:
-    """Display results and winner."""
     t.penup()
     t.goto(0,0)
     #find the lowest time and team name
@@ -264,9 +262,6 @@ def display_results(TIMES_TAKEN) -> None:
     for x in range(0,len(TIMES_TAKEN)):
         if TIMES_TAKEN[x] < lowest_time:
             lowest_time = TIMES_TAKEN[x]
-    for y in range(0,len(n_teams)):
-        
-
     #setting winner variable to a team
     winner = lowest
     #If statement that prints winner and time to the screen
