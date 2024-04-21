@@ -268,6 +268,7 @@ def display_results(times_taken, turtles):
     #Label times 
     for i in range(0,len(times_taken)): 
         t.penup()
+        t.hideturtle()
         t.goto(
             TRACK_END_X + 2 * PADDING_LANE_LABEL,
             lane_n_center_y_pos(i) - FONT_SIZE_LANE_LABELS,
