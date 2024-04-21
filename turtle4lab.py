@@ -264,7 +264,9 @@ def display_results(times_taken, turtles):
     lowest_time = float()    
     t = turtle.Turtle()
     #Label times 
-    for i in range(0,len(times_taken)): 
+    for i in range(0,len(times_taken)):
+        if times_taken[i] == -1: 
+            continue
         t.penup()
         t.hideturtle()
         t.goto(
