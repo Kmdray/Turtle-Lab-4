@@ -7,9 +7,6 @@ fail-under=9.95
 [MESSAGES CONTROL]
 
 disable=
-    fixme,
-    redefined-builtin,
-    consider-using-enumerate,
     consider-using-f-string,
 
 
