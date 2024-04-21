@@ -10,10 +10,76 @@ Description:    This program simulates a relay race between multiple teams using
 
 @authors: Kevin, Shane, James, Matt
 """
+import os
 import random
 import sys
-import time
 import turtle
+
+
+class Team:
+    """
+    Team class to store team information.
+    @authors: Shane
+    """
+
+    def __init__(
+        self,
+        id: int,
+        name: str,
+        color: tuple[int, int, int],
+        speeds: tuple[float, float, float, float],
+        # turtle: turtle.Turtle,
+    ) -> None:
+        self.id = id
+        self.name = name
+        self.color = color
+        self.speeds = speeds
+        # TODO: fill this in if we're using time.time() (James)
+        # self.start_time = ...
+
+        # TODO: assign turtle to team at creation (Kevin)
+        # self.turtle = turtle
+        self.race_time: float = float()
+        self.relay_exchanges_completed = int()
+        # self.distance_covered = float()
+
+    def __str__(self) -> str:
+        """Shows details for the team"""
+        return (
+            f"Team("
+            f"id={self.id},"
+            f" speeds={[round(x, 2) for x in self.speeds]},"
+            f" color={self.color},"
+            f" name={self.name}"
+            ")"
+        )
+
+    def starting_position(self) -> tuple[float, float]:
+        """
+        Returns the starting (x, y) position of the team at the start of the racetrack.
+        @authors: Shane
+        """
+        return TRACK_START_X, lane_n_center_y_pos(self.id)
+
+    def victory_dance(self) -> None:
+        """
+        Performs a victory dance and displays win time and average speed.
+        @authors: Matt?
+        """
+        # self.win_time = ...
+
+    # def finish_time(t2):
+    #     # physically/mathematically calculate time to finish
+    #     RELAY_LENGTH = TRACK_LENGTH / N_RELAYS
+    #     total_time = float()
+    #     for i in range(4):
+    #         # time = distance / speed
+    #         total_time += RELAY_LENGTH / self.speeds[i]
+    #
+    #     # or use time.time() to track elapsed time
+    #     t1 = time.time()
+    #     # do relay
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Constants
@@ -35,9 +101,7 @@ HEIGHT_LANE = HEIGHT_TRACK / N_LANES
 WIDTH_RELAY = WIDTH_TRACK / N_RELAYS
 
 TRACK_START_X = -WIDTH / 2 + PADDING_LEFT
-TRACK_END_X = TRACK_START_X + WIDTH_TRACK
 TRACK_START_Y = -HEIGHT / 2 + PADDING_BOTTOM
-TRACK_END_Y = TRACK_START_Y + HEIGHT_TRACK
 
 FONT_SIZE_LANE_LABELS = 12
 PADDING_LANE_LABEL = 25
@@ -78,7 +142,7 @@ TIMES_TAKEN = [
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Input & setup functions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def set_scenery(n_teams):
+def set_scenery(n_teams: int) -> None:
     """
     Sets up the racetrack and finish line.
     @authors: Shane
@@ -105,16 +169,16 @@ def set_scenery(n_teams):
     # Draw relay exchange zones
     turtle.color("red")
     turtle.pensize(1)
-    for i in range(N_RELAYS - 1):  # 3 lines make 4 relay zones
+    for i in range(1, N_RELAYS):  # 3 lines make 4 relay zones
         turtle.penup()
         turtle.goto(
-            TRACK_START_X + (i + 1) * WIDTH_RELAY,
-            [TRACK_START_Y, TRACK_END_Y][i % 2],
+            TRACK_START_X + i * WIDTH_RELAY,
+            TRACK_START_Y,
         )
         turtle.pendown()
         turtle.goto(
-            TRACK_START_X + (i + 1) * WIDTH_RELAY,
-            [TRACK_END_Y, TRACK_START_Y][i % 2],
+            TRACK_START_X + i * WIDTH_RELAY,
+            HEIGHT / 2 - PADDING_TOP,
         )
 
     # Label lane numbers with team index
@@ -132,27 +196,29 @@ def set_scenery(n_teams):
     # Draw lanes
     turtle.color("black")
     turtle.pensize(2)
-    for i in range(N_LANES - 1):  # 5 lines make 6 lanes
+    for i in range(1, N_LANES):  # 5 lines make 6 lanes
         turtle.penup()
         turtle.goto(
-            [TRACK_START_X, TRACK_END_X][i % 2],
-            TRACK_START_Y + (i + 1) * HEIGHT_LANE,
+            TRACK_START_X,
+            TRACK_START_Y + i * HEIGHT_LANE,
         )
         turtle.pendown()
         turtle.forward(WIDTH_TRACK)
-        turtle.left(180)
 
     # Hide cursor
     turtle.hideturtle()
 
 
-def get_input_for_number_of_teams():
+def get_input_for_number_of_teams() -> int:
     """
     Gets number of teams from user input.
     @authors: Shane
     """
     # Get number of teams
-    n_teams = int(input("Enter number of teams, between 2 and 6: "))
+    if os.environ.get("N_TEAMS"):
+        n_teams = int(os.environ["N_TEAMS"])
+    else:
+        n_teams = int(input("Enter number of teams, between 2 and 6: "))
 
     # Verify it's between two and six
     if n_teams < 2 or n_teams > 6:
@@ -162,9 +228,27 @@ def get_input_for_number_of_teams():
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Race/relay functions
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# TODO: functions to perform laps, relay exchanges, size changes (James, Matt)
+# for team in teams:
+#     for relay in N_RELAYS:
+#         # move forward
+#         # change size
+#         # change color
+#         pass
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Wrap up & show winner functions
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# TODO: functions to decide winner, terminate race, display results (Matt)
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Helper functions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def lane_n_center_y_pos(n):
+def lane_n_center_y_pos(n: int) -> float:
     """
     Returns the y-coordinate of the center of the nth lane. NOTE: starts at 0.
     @authors: Shane
@@ -172,127 +256,78 @@ def lane_n_center_y_pos(n):
     return TRACK_START_Y + HEIGHT_LANE / 2 + n * HEIGHT_LANE
 
 
-def create_turtle(color):
+def create_turtle(color: str, speed: float) -> turtle.Turtle:
     """
-    Function to create a turtle with specific color.
+    Function to create a turtle with specific color and speed.
     @authors: Kevin
     """
     t = turtle.Turtle()
     t.shape("turtle")
     t.color(color)
+    t.speed(speed)
     return t
 
 
-def move_forward(t):
+def move_forward(t: turtle.Turtle) -> None:
     """
     Function to move the turtle forward by 100 units.
-    @TODO: remove this, it's an unused function now.
     @authors: Kevin
     """
     t.forward(100)
 
+def run_race() -> None:
+    """
+    Main function to run race.
+    @authors: James
+    """
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Main race/relay function
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def run_race(turtles):
-    # Local variables
-    speed = int()
-    one_time = float()
-    trtl_height = float()
-    trtl_width = float()
+    laps = 4
+    for lap in range(1, laps + 1):
+        print(f"Lap {lap}:")
+        for t in turtles:
+            move_forward(t)
 
-    # Create Timer
-    timer_text = turtle.Turtle()
-    timer_text.hideturtle()
 
-    # Declare teams and timers lists 
-    # teams = [""] * n_teams
-    timers = [float()] * len(turtles)
-
-    # Create runners and Set starting positions
-    for i, t in enumerate(turtles):
-        # t = turtle.Turtle()
-        t.shape('turtle')
-        t.color(COLORS_ALLOWED[i])
-        t.speed(7)
-        t.penup()
-        t.goto(TRACK_START_X, lane_n_center_y_pos(i))
-        t.pendown()
-        
-        #Initialize turtle and time
-        trtl_height = 0.5
-        trtl_width = 0.5
-        pen_size = 1
-        timer_text.clear()
-
-        # Start the timer for the team currently running
-        start = time.time()
-        
-        # Inner Race Loop (to draw the racers running)
-        for lap in range (0, 4):
-            speed  = random.randint(1,10) / 5
-            # Increases turtle size on each lap.
-            trtl_width = trtl_width + 0.25
-            trtl_height = trtl_height + 0.25
-                    
-            #set the pen size and runner speed
-            t.shapesize(trtl_width,trtl_height, 1) 
-            t.pensize(pen_size)
-            t.speed(speed)
-            
-            # Run the turtle
-            t.forward(WIDTH_RELAY)
-
-            # Increase pen size for each runner.
-            pen_size = pen_size + 2
-            #end Inner Race Loop
-
-        #Capture and display the timer for the team.
-        one_time = "%0.3f" %(time.time() - start)
-        timers[i] = one_time
-##        timer_text.write("Time: " + "%0.2f" %(time.time() - start),align="center", font=("Courier", 30,))
-        #End Outer Race Loop
-
-    return timers
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Wrap up & show winner function
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def display_results(TIMES_TAKEN) -> None:
-    """
-    Display results and winner.
-    @authors: Matt
-    """
+    """Display results and winner."""
     t.penup()
     t.goto(0,0)
-    #setting winner variable to a team
-    winner = 
-    #If statement that prints winner and time to the screen
-    if winner == "scarlet speedsters":
-        print("Scarlet Speedsters Win!")
-        #print(time?)
-    elif winner == "green machines":
-        print("Green Machines Win!")
-        #print(time?)
-    elif winner == "blue blazers":
-        print("Blue Blazers Win!")
-        #print(time?)
-    elif winner == "orange ocelots":
-        print("Orange Ocelots Win!")
-        #print(time?)
-    elif winner == "yellow yaks":
-        print("Yellow Yaks Win!")
-        #print(time?)
-    elif winner == "purple panthers":
-        print("Purple Panthers Win!")
-        #print(time?)     
+    #find the lowest time and team name
+    lowest_time = float() 
+    lowest = str()
+    #Loop to find the lowest time
+    for x in range(0,len(TIMES_TAKEN)):
+        if TIMES_TAKEN[x] < lowest_time:
+            lowest_time = TIMES_TAKEN[x]
+    for y in range(0,len(n_teams)):
+        
 
+    #setting winner variable to a team
+    winner = lowest
+    #If statement that prints winner and time to the screen
+    if winner == NAMES_ALLOWED[0]:
+        print(NAMES_ALLOWED[0])
+        print(lowest_time)
+    elif winner == NAMES_ALLOWED[1]:
+        print(NAMES_ALLOWED[1])
+        print(lowest_time)
+    elif winner == NAMES_ALLOWED[2]:
+        print(NAMES_ALLOWED[2])
+        print(lowest_time)
+    elif winner == NAMES_ALLOWED[3]:
+        print(NAMES_ALLOWED[3])
+        print(lowest_time)
+    elif winner == NAMES_ALLOWED[4]:
+        print(NAMES_ALLOWED[4])
+        print(lowest_time)
+    elif winner == NAMES_ALLOWED[5]:
+        print(NAMES_ALLOWED[5])
+        print(lowest_time)     
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Main function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def main():
+def main() -> int:
     """
     Main function to run the turtle relay race.
     @authors: Kevin
@@ -304,7 +339,7 @@ def main():
     # lane_n_center_y_pos(n: int) #Call - lane n center
     # create_turtle(color: str, speed: float) #Call - create turtle
     # move_forward(t: turtle.Turtle) #Call - move forward
-
+  
     # get input (number of teams) from user
     n_teams = get_input_for_number_of_teams()
 
@@ -318,13 +353,8 @@ def main():
     #       as is hard-coded below (Kevin, James)
     # TODO: use COLORS_ALLOWED/NAMES_ALLOWED to generate all 6 (Kevin, James, Matt)
     # Create turtles with specific colors and speeds
-    # turtles = [create_turtle(color, speed) for color, speed in zip(COLORS_ALLOWED, SPEEDS_ALLOWED)]
-    # turtles = turtles[:n_teams]
-    turtles = []
-    for i in range(n_teams):
-        turtles.append(
-            create_turtle(COLORS_ALLOWED[i])
-        )
+    turtles = [create_turtle(color, speed) for color, speed in zip(COLORS_ALLOWED, SPEEDS_ALLOWED)]
+
     # Set starting positions
     # TODO: use lane_n_center_y_pos() to center each team's turtle & start race (James)
     for i, t in enumerate(turtles):
@@ -333,7 +363,7 @@ def main():
         t.pendown()
 
     # Race loop
-    run_race(turtles)
+    run_race()
 
     # display results and winner
     display_results()
