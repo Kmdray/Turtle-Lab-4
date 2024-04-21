@@ -283,22 +283,22 @@ def display_results(times_taken, turtles):
         if times_taken[x] < lowest_time:
             lowest_time = times_taken[x]      
     #If statement that prints winner and time to the screen
-    if winner == NAMES_ALLOWED[0]:
+    if winner == times_taken[0]:
         print(NAMES_ALLOWED[0])
         print(lowest_time)
-    elif winner == NAMES_ALLOWED[1]:
+    elif winner == times_taken[1]:
         print(NAMES_ALLOWED[1])
         print(lowest_time)
-    elif winner == NAMES_ALLOWED[2]:
+    elif winner == times_taken[2]:
         print(NAMES_ALLOWED[2])
         print(lowest_time)
-    elif winner == NAMES_ALLOWED[3]:
+    elif winner == times_taken[3]:
         print(NAMES_ALLOWED[3])
         print(lowest_time)
-    elif winner == NAMES_ALLOWED[4]:
+    elif winner == times_taken[4]:
         print(NAMES_ALLOWED[4])
         print(lowest_time)
-    elif winner == NAMES_ALLOWED[5]:
+    elif winner == times_taken[5]:
         print(NAMES_ALLOWED[5])
         print(lowest_time)     
 
