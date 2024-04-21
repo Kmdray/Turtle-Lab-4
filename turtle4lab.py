@@ -195,22 +195,27 @@ def move_forward(t):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Main race/relay function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def run_race(TEAMS):
+def run_race(Teams):
+    """
+    run_race function runs the turtle racers
+    @author: James Wagner
+    """
     # Local variables
     trtl_speed = int()
     trtl_height = float()
     trtl_width = float()
     pen_size = int()
+    # team_time = float()  -   (redundant variable.  not needed)
 
     # Create stopwatch to time race teams
     stopwatch = turtle.Turtle()
     stopwatch.hideturtle()
 
     # Declare timers list 
-    TIMERS = [float()] * len(TEAMS)
+    Timers = [float()] * len(Teams)
 
     # Outer Race Loop (for each Team)
-    for i, t in enumerate(TEAMS):
+    for i, t in enumerate(Teams):
         #Initialize runners and reset the stopwatch
         trtl_height = 1.0
         trtl_width = 1.0
@@ -219,7 +224,7 @@ def run_race(TEAMS):
         # Start the stopwatch for the team currently running
         start = time.time()
 
-        # Inner Race Loop (to draw the turtle racers running)
+        # Inner Race Loop (to draw the turtleracers running)
         for runner in range (0, 4):
             # Assign random speed to each turtle runner
             trtl_speed  = random.randint(1,10) / 5
@@ -239,10 +244,12 @@ def run_race(TEAMS):
             # End Inner Race Loop
 
         # Capture the timer for the team.
-        TIMERS[i] = "%0.3f" %(time.time() - start)
+        # team_time = "%0.3f" %(time.time() - start)  -  (redundant variable.  not needed)
+        # Timers[i] = team_time  -  (redundant variable.  not needed)
+        Timers[i] = float("%0.3f" %(time.time() - start))
         # End Outer Race Loop
 
-    return TIMERS
+    return Timers
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
