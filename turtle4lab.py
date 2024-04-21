@@ -334,6 +334,14 @@ def main():
 
     # Race loop
     times_taken = run_race(turtles)
+    for i in range(n_teams, N_LANES):
+      times_taken.append(-1)
+        
+    # Calculate the winning team and display results
+    winning_team = times_taken.index(min(times_taken))
+    winning_team_name = NAMES_ALLOWED[winning_team]
+    print("Winner:", winning_team_name)
+    print("Time taken:", min(times_taken))
 
     # display results and winner
     display_results(times_taken, turtles)
