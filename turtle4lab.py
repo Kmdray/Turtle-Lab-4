@@ -296,7 +296,7 @@ def main():
     n_teams = get_input_for_number_of_teams()
 
     # set up the screen
-    set_scenery(n_teams=n_teams)
+    # set_scenery(n_teams=n_teams)
 
     # TODO: Build teams list; assign id, color, name, speeds; allocate time (Matt?)
     # teams = [build_team(i) for i in range(n_teams)]
