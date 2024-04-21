@@ -58,22 +58,6 @@ NAMES_ALLOWED = [
     "yellow yaks",
     "purple panthers",
 ]
-SPEEDS_ALLOWED = [
-    random.randint(1, 10),
-    random.randint(1, 10),
-    random.randint(1, 10),
-    random.randint(1, 10),
-    random.randint(1, 10),
-    random.randint(1, 10),
-]
-TIMES_TAKEN = [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-]
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -255,6 +239,7 @@ def display_results(times_taken, turtles):
     # Declare variables
     lowest_time = float()
     t = turtle.Turtle()
+
     # Label times
     for i in range(0, len(times_taken)):
         if times_taken[i] == -1:
@@ -270,11 +255,13 @@ def display_results(times_taken, turtles):
     # turtles[0].forward(30)
     # t.hideturtle()
     # turtle.done()
+
     lowest_time = times_taken[0]
     # Loop to find the lowest time
     for x in range(0, len(times_taken)):
         if times_taken[x] < lowest_time and times_taken[x] != -1:
             lowest_time = times_taken[x]
+
     # If statement that prints winner and time to the screen
     if lowest_time == times_taken[0]:
         print(NAMES_ALLOWED[0])
@@ -311,6 +298,7 @@ def main():
     turtles = []
     for i in range(n_teams):
         turtles.append(create_turtle(COLORS_ALLOWED[i]))
+
     # Set starting positions
     for i, t in enumerate(turtles):
         t.penup()
