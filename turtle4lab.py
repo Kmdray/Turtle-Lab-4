@@ -59,12 +59,12 @@ NAMES_ALLOWED = [
     "purple panthers",
 ]
 SPEEDS_ALLOWED = [
-  random.randint(1,10),
-  random.randint(1,10),
-  random.randint(1,10),
-  random.randint(1,10),
-  random.randint(1,10),
-  random.randint(1,10),
+    random.randint(1, 10),
+    random.randint(1, 10),
+    random.randint(1, 10),
+    random.randint(1, 10),
+    random.randint(1, 10),
+    random.randint(1, 10),
 ]
 TIMES_TAKEN = [
     0,
@@ -74,6 +74,7 @@ TIMES_TAKEN = [
     0,
     0,
 ]
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Input & setup functions
@@ -216,7 +217,7 @@ def run_race(Teams):
 
     # Outer Race Loop (for each Team)
     for i, t in enumerate(Teams):
-        #Initialize runners and reset the stopwatch
+        # Initialize runners and reset the stopwatch
         trtl_height = 1.0
         trtl_width = 1.0
         pen_size = 1
@@ -225,12 +226,12 @@ def run_race(Teams):
         start = time.time()
 
         # Inner Race Loop (to draw the turtleracers running)
-        for runner in range (0, 4):
+        for runner in range(0, 4):
             # Assign random speed to each turtle runner
-            trtl_speed  = random.randint(1,10) / 5
+            trtl_speed = random.randint(1, 10) / 5
 
             # Set the pen size and runner speed
-            t.shapesize(trtl_width,trtl_height, 1)
+            t.shapesize(trtl_width, trtl_height, 1)
             t.pensize(pen_size)
             t.speed(trtl_speed)
 
@@ -246,7 +247,7 @@ def run_race(Teams):
         # Capture the timer for the team.
         # team_time = "%0.3f" %(time.time() - start)  -  (redundant variable.  not needed)
         # Timers[i] = team_time  -  (redundant variable.  not needed)
-        Timers[i] = float("%0.3f" %(time.time() - start))
+        Timers[i] = float("%0.3f" % (time.time() - start))
         # End Outer Race Loop
 
     return Timers
@@ -260,11 +261,11 @@ def display_results(times_taken, turtles):
     Display results and winner.
     @authors: Matt
     """
-    #Declare variables
+    # Declare variables
     lowest_time = float()
     t = turtle.Turtle()
-    #Label times
-    for i in range(0,len(times_taken)):
+    # Label times
+    for i in range(0, len(times_taken)):
         if times_taken[i] == -1:
             continue
         t.penup()
@@ -279,11 +280,11 @@ def display_results(times_taken, turtles):
     # t.hideturtle()
     # turtle.done()
     lowest_time = times_taken[0]
-    #Loop to find the lowest time
-    for x in range(0,len(times_taken)):
+    # Loop to find the lowest time
+    for x in range(0, len(times_taken)):
         if times_taken[x] < lowest_time and times_taken[x] != -1:
             lowest_time = times_taken[x]
-    #If statement that prints winner and time to the screen
+    # If statement that prints winner and time to the screen
     if lowest_time == times_taken[0]:
         print(NAMES_ALLOWED[0])
         print(lowest_time)
@@ -303,6 +304,7 @@ def display_results(times_taken, turtles):
         print(NAMES_ALLOWED[5])
         print(lowest_time)
 
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Main function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -314,12 +316,10 @@ def main():
     # get input (number of teams) from user
     n_teams = get_input_for_number_of_teams()
 
-    #create turtle
+    # create turtle
     turtles = []
     for i in range(n_teams):
-        turtles.append(
-            create_turtle(COLORS_ALLOWED[i])
-        )
+        turtles.append(create_turtle(COLORS_ALLOWED[i]))
     # Set starting positions
     for i, t in enumerate(turtles):
         t.penup()
