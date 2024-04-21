@@ -275,7 +275,8 @@ def display_results(times_taken, turtles):
 
     # turtles[0].forward(30)
     # t.hideturtle()
-    # turtle.done()
+    # turtle.done() 
+    lowest_time = times_taken[0]
     #Loop to find the lowest time
     for x in range(0,len(times_taken)):
         if times_taken[x] < lowest_time and times_taken[x] != -1:
