@@ -315,11 +315,11 @@ def main():
         t.pendown()
 
     # Race loop
-    run_race(turtles)
+    times_taken = run_race(turtles)
 
     # display results and winner
-    display_results()
-
+    display_results(times_taken)
+   
     # finish program
     turtle.done()
     return 0
