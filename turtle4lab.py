@@ -261,9 +261,7 @@ def display_results(times_taken, turtles):
     @authors: Matt
     """
     #Declare variables    
-    lowest_time = float() 
-    lowest = str()
-    winner = lowest
+    lowest_time = float()    
     t = turtle.Turtle()
     #Label times 
     for i in range(0,len(times_taken)): 
@@ -280,25 +278,25 @@ def display_results(times_taken, turtles):
     # turtle.done()
     #Loop to find the lowest time
     for x in range(0,len(times_taken)):
-        if times_taken[x] < lowest_time:
+        if times_taken[x] < lowest_time and times_taken[x] != -1:
             lowest_time = times_taken[x]      
     #If statement that prints winner and time to the screen
-    if winner == times_taken[0]:
+    if lowest_time == times_taken[0]:
         print(NAMES_ALLOWED[0])
         print(lowest_time)
-    elif winner == times_taken[1]:
+    elif lowest_time == times_taken[1]:
         print(NAMES_ALLOWED[1])
         print(lowest_time)
-    elif winner == times_taken[2]:
+    elif lowest_time == times_taken[2]:
         print(NAMES_ALLOWED[2])
         print(lowest_time)
-    elif winner == times_taken[3]:
+    elif lowest_time == times_taken[3]:
         print(NAMES_ALLOWED[3])
         print(lowest_time)
-    elif winner == times_taken[4]:
+    elif lowest_time == times_taken[4]:
         print(NAMES_ALLOWED[4])
         print(lowest_time)
-    elif winner == times_taken[5]:
+    elif lowest_time == times_taken[5]:
         print(NAMES_ALLOWED[5])
         print(lowest_time)     
 
