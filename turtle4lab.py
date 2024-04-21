@@ -184,15 +184,6 @@ def create_turtle(color):
     return t
 
 
-def move_forward(t):
-    """
-    Function to move the turtle forward by 100 units.
-    @TODO: remove this, it's an unused function now.
-    @authors: Kevin
-    """
-    t.forward(100)
-
-
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Main race/relay function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
