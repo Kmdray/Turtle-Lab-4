@@ -195,66 +195,54 @@ def move_forward(t):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Main race/relay function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def run_race(turtles):
+def run_race(TEAMS):
     # Local variables
-    speed = int()
-    one_time = float()
+    trtl_speed = int()
     trtl_height = float()
     trtl_width = float()
+    pen_size = int()
 
-    # Create Timer
-    timer_text = turtle.Turtle()
-    timer_text.hideturtle()
+    # Create stopwatch to time race teams
+    stopwatch = turtle.Turtle()
+    stopwatch.hideturtle()
 
-    # Declare teams and timers lists 
-    # teams = [""] * n_teams
-    timers = [float()] * len(turtles)
+    # Declare timers list 
+    TIMERS = [float()] * len(TEAMS)
 
-    # Create runners and Set starting positions
-    for i, t in enumerate(turtles):
-        # t = turtle.Turtle()
-        t.shape('turtle')
-        t.color(COLORS_ALLOWED[i])
-        t.speed(7)
-        t.penup()
-        t.goto(TRACK_START_X, lane_n_center_y_pos(i))
-        t.pendown()
-        
-        #Initialize turtle and time
-        trtl_height = 0.5
-        trtl_width = 0.5
+    # Outer Race Loop (for each Team)
+    for i, t in enumerate(TEAMS):
+        #Initialize runners and reset the stopwatch
+        trtl_height = 1.0
+        trtl_width = 1.0
         pen_size = 1
-        timer_text.clear()
-
-        # Start the timer for the team currently running
+        stopwatch.clear()
+        # Start the stopwatch for the team currently running
         start = time.time()
-        
-        # Inner Race Loop (to draw the racers running)
-        for lap in range (0, 4):
-            speed  = random.randint(1,10) / 5
-            # Increases turtle size on each lap.
-            trtl_width = trtl_width + 0.25
-            trtl_height = trtl_height + 0.25
+
+        # Inner Race Loop (to draw the turtle racers running)
+        for runner in range (0, 4):
+            # Assign random speed to each turtle runner
+            trtl_speed  = random.randint(1,10) / 5
                     
-            #set the pen size and runner speed
+            # Set the pen size and runner speed
             t.shapesize(trtl_width,trtl_height, 1) 
             t.pensize(pen_size)
-            t.speed(speed)
+            t.speed(trtl_speed)
             
             # Run the turtle
             t.forward(WIDTH_RELAY)
 
-            # Increase pen size for each runner.
+            # Increase turtle size and pen size for each runner.
+            trtl_width = trtl_width + 0.25
+            trtl_height = trtl_height + 0.25
             pen_size = pen_size + 2
-            #end Inner Race Loop
+            # End Inner Race Loop
 
-        #Capture and display the timer for the team.
-        one_time = "%0.3f" %(time.time() - start)
-        timers[i] = one_time
-##        timer_text.write("Time: " + "%0.2f" %(time.time() - start),align="center", font=("Courier", 30,))
-        #End Outer Race Loop
+        # Capture the timer for the team.
+        TIMERS[i] = "%0.3f" %(time.time() - start)
+        # End Outer Race Loop
 
-    return timers
+    return TIMERS
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
