@@ -248,7 +248,7 @@ def run_race(TEAMS):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Wrap up & show winner function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def display_results(times_taken):
+def display_results(times_taken, turtles):
     """
     Display results and winner.
     @authors: Matt
@@ -261,9 +261,15 @@ def display_results(times_taken):
     #Label times 
     for i in range(0,len(times_taken)): 
         t.penup()
-        t.goto(TRACK_END_X + PADDING_LANE_LABEL, lane_n_center_y_pos(i))
-        t.write(times_taken[i])
-    t.done()   
+        t.goto(
+            TRACK_END_X + 2 * PADDING_LANE_LABEL,
+            lane_n_center_y_pos(i) - FONT_SIZE_LANE_LABELS,
+        )
+        t.write(times_taken[i], font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
+
+    # turtles[0].forward(30)
+    # t.hideturtle()
+    # turtle.done()
     #Loop to find the lowest time
     for x in range(0,len(times_taken)):
         if times_taken[x] < lowest_time:
@@ -322,7 +328,7 @@ def main():
     times_taken = run_race(turtles)
 
     # display results and winner
-    display_results(times_taken)
+    display_results(times_taken, turtles)
    
     # finish program
     turtle.done()
