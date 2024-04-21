@@ -211,7 +211,7 @@ def run_race(Teams):
     stopwatch = turtle.Turtle()
     stopwatch.hideturtle()
 
-    # Declare timers list 
+    # Declare timers list
     Timers = [float()] * len(Teams)
 
     # Outer Race Loop (for each Team)
@@ -228,12 +228,12 @@ def run_race(Teams):
         for runner in range (0, 4):
             # Assign random speed to each turtle runner
             trtl_speed  = random.randint(1,10) / 5
-                    
+
             # Set the pen size and runner speed
-            t.shapesize(trtl_width,trtl_height, 1) 
+            t.shapesize(trtl_width,trtl_height, 1)
             t.pensize(pen_size)
             t.speed(trtl_speed)
-            
+
             # Run the turtle
             t.forward(WIDTH_RELAY)
 
@@ -260,12 +260,12 @@ def display_results(times_taken, turtles):
     Display results and winner.
     @authors: Matt
     """
-    #Declare variables    
-    lowest_time = float()    
+    #Declare variables
+    lowest_time = float()
     t = turtle.Turtle()
-    #Label times 
+    #Label times
     for i in range(0,len(times_taken)):
-        if times_taken[i] == -1: 
+        if times_taken[i] == -1:
             continue
         t.penup()
         t.hideturtle()
@@ -277,12 +277,12 @@ def display_results(times_taken, turtles):
 
     # turtles[0].forward(30)
     # t.hideturtle()
-    # turtle.done() 
+    # turtle.done()
     lowest_time = times_taken[0]
     #Loop to find the lowest time
     for x in range(0,len(times_taken)):
         if times_taken[x] < lowest_time and times_taken[x] != -1:
-            lowest_time = times_taken[x]      
+            lowest_time = times_taken[x]
     #If statement that prints winner and time to the screen
     if lowest_time == times_taken[0]:
         print(NAMES_ALLOWED[0])
@@ -301,7 +301,7 @@ def display_results(times_taken, turtles):
         print(lowest_time)
     elif lowest_time == times_taken[5]:
         print(NAMES_ALLOWED[5])
-        print(lowest_time)     
+        print(lowest_time)
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Main function
@@ -328,18 +328,21 @@ def main():
 
     # Race loop
     times_taken = run_race(turtles)
-        
+
     # Calculate the winning team and display results
     winning_team = times_taken.index(min(times_taken))
     winning_team_name = NAMES_ALLOWED[winning_team]
     print("Winner:", winning_team_name)
     print("Time taken:", min(times_taken))
+
+    # Fill empty slots (until N_LANES, with -1) to guarantee the same length
+    # e.g. [0.1, 0.2, 0.3] -> [0.1, 0.2, 0.3, -1, -1, -1]
     for i in range(n_teams, N_LANES):
         times_taken.append(-1)
 
     # display results and winner
     display_results(times_taken, turtles)
-   
+
     # finish program
     turtle.done()
     return 0
