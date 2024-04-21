@@ -263,14 +263,6 @@ def main():
     Main function to run the turtle relay race.
     @authors: Kevin
     """
-    # CALLING OTHER FUNCTIONS??? - Not sure exactly how to call these and where. Will discuss in our meeting.
-    # get_input_for_number_of_teams() #Call - get input
-    # turtle.reset #??  #Reset???
-    # set_scenery(n_teams: int) #Call - set scenery
-    # lane_n_center_y_pos(n: int) #Call - lane n center
-    # create_turtle(color: str, speed: float) #Call - create turtle
-    # move_forward(t: turtle.Turtle) #Call - move forward
-
     # get input (number of teams) from user
     n_teams = get_input_for_number_of_teams()
 
@@ -279,11 +271,6 @@ def main():
 
     # TODO: Build teams list; assign id, color, name, speeds; allocate time (Matt?)
     # teams = [build_team(i) for i in range(n_teams)]
-
-    # TODO: use Shane's n_teams value to behave accordingly, not just 4 teams
-    #       as is hard-coded below (Kevin, James)
-    # TODO: use COLORS_ALLOWED/NAMES_ALLOWED to generate all 6 (Kevin, James, Matt)
-    # Create turtles with specific colors and speeds
     # turtles = [create_turtle(color, speed) for color, speed in zip(COLORS_ALLOWED, SPEEDS_ALLOWED)]
     # turtles = turtles[:n_teams]
     turtles = []
