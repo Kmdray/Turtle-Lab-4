@@ -248,22 +248,22 @@ def run_race(TEAMS):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Wrap up & show winner function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def display_results(TIMES_TAKEN):
+def display_results(times_taken):
     """
     Display results and winner.
     @authors: Matt
     """
-    t.penup()
-    t.goto(0,0)
-    #find the lowest time and team name
+    #Declare variables    
     lowest_time = float() 
     lowest = str()
+    winner = lowest
+    #Move turtle
+    t.penup()
+    t.goto(0,0) 
     #Loop to find the lowest time
     for x in range(0,len(TIMES_TAKEN)):
-        if TIMES_TAKEN[x] < lowest_time:
-            lowest_time = TIMES_TAKEN[x]
-    #setting winner variable to a team
-    winner = lowest
+        if times_taken[x] < lowest_time:
+            lowest_time = times_taken[x]      
     #If statement that prints winner and time to the screen
     if winner == NAMES_ALLOWED[0]:
         print(NAMES_ALLOWED[0])
