@@ -253,7 +253,41 @@ def display_results():
     Display results and winner.
     @authors: Matt
     """
+def display_results(TIMES_TAKEN) -> None:
+    """Display results and winner."""
+    t.penup()
+    t.goto(0,0)
+    #find the lowest time and team name
+    lowest_time = float() 
+    lowest = str()
+    #Loop to find the lowest time
+    for x in range(0,len(TIMES_TAKEN)):
+        if TIMES_TAKEN[x] < lowest_time:
+            lowest_time = TIMES_TAKEN[x]
+    for y in range(0,len(n_teams)):
+        
 
+    #setting winner variable to a team
+    winner = lowest
+    #If statement that prints winner and time to the screen
+    if winner == NAMES_ALLOWED[0]:
+        print(NAMES_ALLOWED[0])
+        print(lowest_time)
+    elif winner == NAMES_ALLOWED[1]:
+        print(NAMES_ALLOWED[1])
+        print(lowest_time)
+    elif winner == NAMES_ALLOWED[2]:
+        print(NAMES_ALLOWED[2])
+        print(lowest_time)
+    elif winner == NAMES_ALLOWED[3]:
+        print(NAMES_ALLOWED[3])
+        print(lowest_time)
+    elif winner == NAMES_ALLOWED[4]:
+        print(NAMES_ALLOWED[4])
+        print(lowest_time)
+    elif winner == NAMES_ALLOWED[5]:
+        print(NAMES_ALLOWED[5])
+        print(lowest_time)     
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Main function
