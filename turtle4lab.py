@@ -313,10 +313,15 @@ def main():
     # get input (number of teams) from user
     n_teams = get_input_for_number_of_teams()
 
-    # create turtle
+    # declare variables
+    # declare and initialize the 'turtles' list
     turtles = []
+
+    # create turtles for each team
     for i in range(n_teams):
-        turtles.append(create_turtle(COLORS_ALLOWED[i]))
+        #declare and create turtle for each team
+        t = create_turtle(COLORS_ALLOWED[i])
+        turtles.append(t)
 
     # Set starting positions
     for i, t in enumerate(turtles):
@@ -331,11 +336,13 @@ def main():
     winning_team = times_taken.index(min(times_taken))
     winning_team_name = NAMES_ALLOWED[winning_team]
     print("Winner:", winning_team_name)
-    print("Time taken:", min(times_taken))
+    print("Time taken:", min(times_taken), "seconds")
 
     # Fill empty slots (until N_LANES, with -1) to guarantee the same length
     # e.g. [0.1, 0.2, 0.3] -> [0.1, 0.2, 0.3, -1, -1, -1]
-    for i in range(n_teams, N_LANES):
+    #for i in range(n_teams, N_LANES):
+        #times_taken.append(-1)
+    for i in range(len(times_taken), N_LANES):
         times_taken.append(-1)
 
     # display results and winner
