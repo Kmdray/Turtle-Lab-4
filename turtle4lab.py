@@ -261,27 +261,46 @@ def display_results(times_taken, turtles):
     for x in range(0, len(times_taken)):
         if times_taken[x] < lowest_time and times_taken[x] != -1:
             lowest_time = times_taken[x]
-
+    t.penup()
+    t.goto(-75,-200)
+    t.pendown()
     # If statement that prints winner and time to the screen
     if lowest_time == times_taken[0]:
-        print(NAMES_ALLOWED[0])
-        print(lowest_time)
+        t.write("Winner: " + NAMES_ALLOWED[0], font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
+        t.penup()
+        t.goto(-75,-215)
+        t.pendown()
+        t.write(lowest_time, font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
     elif lowest_time == times_taken[1]:
-        print(NAMES_ALLOWED[1])
-        print(lowest_time)
+        t.write("Winner: " +  NAMES_ALLOWED[1], font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
+        t.penup()
+        t.goto(-75,-215)
+        t.pendown()
+        t.write(lowest_time, font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
     elif lowest_time == times_taken[2]:
-        print(NAMES_ALLOWED[2])
-        print(lowest_time)
+        t.write("Winner: " +  NAMES_ALLOWED[2], font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
+        t.penup()
+        t.goto(-75,-215)
+        t.pendown()
+        t.write(lowest_time, font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
     elif lowest_time == times_taken[3]:
-        print(NAMES_ALLOWED[3])
-        print(lowest_time)
+        t.write("Winner: " + NAMES_ALLOWED[3], font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
+        t.penup()
+        t.goto(-75,-215)
+        t.pendown()
+        t.write(lowest_time, font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
     elif lowest_time == times_taken[4]:
-        print(NAMES_ALLOWED[4])
-        print(lowest_time)
+        t.write("Winner: " +  NAMES_ALLOWED[4], font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
+        t.penup()
+        t.goto(-75,-215)
+        t.pendown()
+        t.write(lowest_time, font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
     elif lowest_time == times_taken[5]:
-        print(NAMES_ALLOWED[5])
-        print(lowest_time)
-
+        t.write("Winner: " +  NAMES_ALLOWED[5], font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
+        t.penup()
+        t.goto(-75,-215)
+        t.pendown()
+        t.write(lowest_time, font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Main function
