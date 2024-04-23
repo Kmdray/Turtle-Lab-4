@@ -326,6 +326,9 @@ def main():
     # declare and initialize the 'turtles' list
     turtles = []
 
+    # set up the screen
+    set_scenery(n_teams=n_teams)
+
     # create turtles for each team
     for i in range(n_teams):
         #declare and create turtle for each team
@@ -337,9 +340,6 @@ def main():
         t.penup()
         t.goto(TRACK_START_X, lane_n_center_y_pos(i))
         t.pendown()
-
-    # set up the screen
-    set_scenery(n_teams=n_teams)
 
     # Race loop
     times_taken = run_race(turtles)
