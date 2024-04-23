@@ -349,8 +349,6 @@ def main():
 
     # Fill empty slots (until N_LANES, with -1) to guarantee the same length
     # e.g. [0.1, 0.2, 0.3] -> [0.1, 0.2, 0.3, -1, -1, -1]
-    #for i in range(n_teams, N_LANES):
-        #times_taken.append(-1)
     for i in range(len(times_taken), N_LANES):
         times_taken.append(-1)
 
