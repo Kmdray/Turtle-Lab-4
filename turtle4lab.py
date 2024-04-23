@@ -21,7 +21,7 @@ import turtle
 N_LANES = 6
 N_RELAYS = 4
 
-WIDTH = 800
+WIDTH = 1500
 HEIGHT = 600
 
 PADDING_TOP = 50
@@ -47,16 +47,16 @@ COLORS_ALLOWED = [
     ("green"),  # green
     ("blue"),  # blue
     ("orange"),  # orange
-    ("yellow"),  # yellow
     ("purple"),  # purple
+    ("yellow"),  # yellow
 ]
 NAMES_ALLOWED = [
-    "scarlet speedsters",
-    "green machines",
-    "blue blazers",
-    "orange ocelots",
-    "yellow yaks",
-    "purple panthers",
+    "Scarlet Speedsters",
+    "Green Ghosts",
+    "Blue Blazers",
+    "Orange Ocelots",
+    "Purple Panthers",
+    "Yellow Yaks",
 ]
 
 
@@ -112,7 +112,7 @@ def set_scenery(n_teams):
             lane_n_center_y_pos(i) - FONT_SIZE_LANE_LABELS,
         )
         turtle.pendown()
-        turtle.write(i, font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
+        turtle.write(i + 1, font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
 
     # Draw lanes
     turtle.color("black")
@@ -126,6 +126,15 @@ def set_scenery(n_teams):
         turtle.pendown()
         turtle.forward(WIDTH_TRACK)
         turtle.left(180)
+    # Label lanes with team names
+    for i in range(0, n_teams): 
+        turtle.hideturtle()
+        turtle.penup()
+        turtle.goto(
+            TRACK_START_X + 0.5 * PADDING_LANE_LABEL,
+            15 + lane_n_center_y_pos(i) - FONT_SIZE_LANE_LABELS,
+        )
+        turtle.write(NAMES_ALLOWED[i], font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
 
     # Hide cursor
     turtle.hideturtle()
