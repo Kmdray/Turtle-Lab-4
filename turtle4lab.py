@@ -190,7 +190,6 @@ def run_race(Teams):
     trtl_height = float()
     trtl_width = float()
     pen_size = int()
-    # team_time = float()  -   (redundant variable.  not needed)
 
     # Create stopwatch to time race teams
     stopwatch = turtle.Turtle()
@@ -212,7 +211,7 @@ def run_race(Teams):
         # Inner Race Loop (to draw the turtleracers running)
         for runner in range(0, 4):
             # Assign random speed to each turtle runner
-            trtl_speed = random.randint(1, 10) / 5
+            trtl_speed = random.randint(1, 5)
 
             # Set the pen size and runner speed
             t.shapesize(trtl_width, trtl_height, 1)
@@ -229,8 +228,6 @@ def run_race(Teams):
             # End Inner Race Loop
 
         # Capture the timer for the team.
-        # team_time = "%0.3f" %(time.time() - start)  -  (redundant variable.  not needed)
-        # Timers[i] = team_time  -  (redundant variable.  not needed)
         Timers[i] = float("%0.3f" % (time.time() - start))
         # End Outer Race Loop
 
