@@ -27,7 +27,7 @@ HEIGHT = 600
 PADDING_TOP = 50
 PADDING_BOTTOM = 150
 PADDING_LEFT = 50
-PADDING_RIGHT = 100
+PADDING_RIGHT = 150
 
 WIDTH_TRACK = WIDTH - PADDING_LEFT - PADDING_RIGHT
 HEIGHT_TRACK = HEIGHT - PADDING_TOP - PADDING_BOTTOM
@@ -337,6 +337,9 @@ def main():
         t.penup()
         t.goto(TRACK_START_X, lane_n_center_y_pos(i))
         t.pendown()
+
+    # set up the screen
+    set_scenery(n_teams=n_teams)
 
     # Race loop
     times_taken = run_race(turtles)
