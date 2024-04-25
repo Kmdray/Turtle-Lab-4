@@ -322,6 +322,9 @@ def main():
 
     # declare variables
     n_teams = int()
+    times_taken = float()
+    winning_team_index = int()
+    winning_team_name = ""
     # declare and initialize the 'turtles' list
     turtles = []
   
@@ -347,7 +350,7 @@ def main():
     times_taken = run_race(turtles)
 
     # Calculate the winning team and display results
-    winning_team = times_taken.index(min(times_taken))
+    winning_team_index = times_taken.index(min(times_taken))
     winning_team_name = NAMES_ALLOWED[winning_team]
     print("Winner:", winning_team_name)
     print("Time taken:", min(times_taken), "seconds")
