@@ -329,6 +329,7 @@ def display_results(times_taken, turtles):
         t.pendown()
         t.write(f"{lowest_time} s", font=("Arial", FONT_SIZE_LANE_LABELS, "normal"))
 
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Main function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -345,7 +346,7 @@ def main():
     winning_team_name = ""
     # declare and initialize the 'turtles' list
     turtles = []
-  
+
     # get input (number of teams) from user
     n_teams = get_input_for_number_of_teams()
 
@@ -354,7 +355,7 @@ def main():
 
     # create turtles for each team
     for i in range(n_teams):
-        #declare and create turtle for each team
+        # declare and create turtle for each team
         t = create_turtle(COLORS_ALLOWED[i])
         turtles.append(t)
 
