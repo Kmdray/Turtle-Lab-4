@@ -145,6 +145,9 @@ def get_input_for_number_of_teams():
     Gets number of teams from user input.
     @authors: Shane
     """
+    # Declare vars
+    n_teams = int()
+
     # Get number of teams
     n_teams = int(input("Enter number of teams, between 2 and 6: "))
 
