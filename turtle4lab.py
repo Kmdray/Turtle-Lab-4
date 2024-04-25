@@ -240,7 +240,7 @@ def run_race(Teams):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Wrap up & show winner function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def display_results(times_taken, turtles):
+def display_results(times_taken):
     """
     Display results and winner.
     @authors: Matt
@@ -380,7 +380,7 @@ def main():
         times_taken.append(-1)
 
     # display results and winner
-    display_results(times_taken, turtles)
+    display_results(times_taken)
 
     # finish program
     turtle.done()
