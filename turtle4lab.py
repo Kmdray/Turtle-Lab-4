@@ -21,7 +21,7 @@ import turtle
 N_LANES = 6
 N_RELAYS = 4
 
-WIDTH = 1500
+WIDTH = 1300
 HEIGHT = 600
 
 PADDING_TOP = 50
@@ -316,12 +316,14 @@ def main():
     Main function to run the turtle relay race.
     @authors: Kevin
     """
-    # get input (number of teams) from user
-    n_teams = get_input_for_number_of_teams()
 
     # declare variables
+    n_teams = int()
     # declare and initialize the 'turtles' list
     turtles = []
+  
+    # get input (number of teams) from user
+    n_teams = get_input_for_number_of_teams()
 
     # set up the screen
     set_scenery(n_teams=n_teams)
